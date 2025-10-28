@@ -1,0 +1,35 @@
+/*
+Different shades of brown that I use:
+    #292524 (Base)
+    #443e3c (Macro Base)
+    #625a58 (Neutral)
+    #756c69 (Highlight)
+
+Whites:
+    #FFFFFF
+    #F3F3F3 (Accent)
+
+Positive/Negative:
+    #57bb8a (Green)
+    #e67c73 (Red)
+
+Political:
+    #006391 (Republican Red)
+    #E24A38 (Democrat Blue)
+
+OTT Yellow:
+    #FCBA04 
+*/
+
+/*
+
+*/
+
+  body {
+    background-color: #292524;
+    color: #ffffff;
+  }
+  
+  a {
+    font-weight: bold;
+  }
