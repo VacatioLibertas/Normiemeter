@@ -18,18 +18,61 @@ Political:
     #E24A38 (Democrat Blue)
 
 OTT Yellow:
-    #FCBA04 
+    #FCBA04
 */
 
 /*
-
+Fonts (from Substack):
+    Mono (Headings) - looks like JetBrains Mono kind of
+    Classic Serif (Text) - Googling reveals this is either Georgia or Spectral
+    Inconsolata (Other - example?) 
 */
 
   body {
     background-color: #292524;
     color: #ffffff;
+    font-family: Georgia;
+    font-size: 16px;
+    margin: 0px;
+  }
+
+  #header {
+    border-bottom: 0.5px solid #443e3c;
+    padding: 5px 5px 0px 0px; 
+    text-align: center;
+    font-size: 12px;
+  }
+
+  #content {
+    padding: 10px;
+  }
+
+  #logo {
+    background-color: #ffffff;
+    border-radius: 20%;
+    height: 40px;
+    width: 40px;
+    margin: 15px 25px;
+    padding: 0px;
+    position: absolute;
+    float: left;
+  }
+
+  a {
+    color: #FCBA04;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
   }
   
-  a {
-    font-weight: bold;
+  h1 {
+    font-family: "JetBrains Mono";
   }
+
+  @font-face {
+    font-family: "JetBrains Mono";
+    src: url(../fonts/JetBrainsMono-VariableFont_wght.ttf) format(truetype);
+  }
+  
