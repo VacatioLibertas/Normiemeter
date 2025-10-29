@@ -46,6 +46,7 @@ Fonts (from Substack):
     margin-left: 20%;
     margin-right: 20%;
     margin-bottom: 0px;
+    position: relative;
   }
 
   #logo {
@@ -57,6 +58,17 @@ Fonts (from Substack):
     padding: 0px;
     position: absolute;
     float: left;
+  }
+
+  /* stand-in for social media share button */
+  #toy {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+  }
+
+  #toy:active {
+    transform: scaley(.8);
   }
 
   a {
