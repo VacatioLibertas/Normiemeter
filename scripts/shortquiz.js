@@ -96,9 +96,8 @@
 	function computeContribution(q, answer) {
 		const netSupport = Number(q['Net Support']) || 0;
 		const salience = Number(q['Salience']) || 0;
-		// agree sign per user's rules
-		const agreeSign = (netSupport >= 0) ? 1 : -1;
-		const agreeScore = agreeSign * salience * netSupport;
+		// contribution: agreeing gives salience * netSupport (positive when public supports, negative when public opposes)
+		const agreeScore = salience * netSupport;
 		if (answer === 'agree') return agreeScore;
 		if (answer === 'disagree') return -agreeScore;
 		return 0; // skip
