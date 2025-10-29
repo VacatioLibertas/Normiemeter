@@ -25,11 +25,6 @@ Fonts (from Substack):
     Inconsolata (Headings)
 */
 
-  html {
-    scrollbar-width: 4px;
-    scrollbar-color: #f3f3f3, #ffffff;
-  }
-
   body {
     background-color: #292524;
     color: #ffffff;
@@ -37,6 +32,7 @@ Fonts (from Substack):
     font-size: 16px;
     margin: 0px;
     text-align: center;
+    overflow-x: hidden;
   }
 
   #header {
@@ -130,7 +126,7 @@ Fonts (from Substack):
 
   #question {
     margin-bottom: 0px;
-    overflow: auto;
+    overflow-x: hidden;
   }
 
   #proposal {
