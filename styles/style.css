@@ -129,9 +129,30 @@ Fonts (from Substack):
     font-size: 18px;
   }
 
+  .button3 {
+    font-family: Georgia;
+    text-align: center;
+    display: inline-block;
+    color: #ffffff;
+    background-color: #625a58;
+    border-radius: 5px;
+    width: 230px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    padding: 4px;
+    border: none;
+    font-size: 24px;
+  }
+
   .button:hover, .button2:hover {
     text-decoration: none;
     background-color: #e3a703;
+    cursor: pointer;
+  }
+
+  .button3:hover {
+    text-decoration: none;
+    background-color: #443e3c;
     cursor: pointer;
   }
 

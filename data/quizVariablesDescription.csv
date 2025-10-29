@@ -1,0 +1,10 @@
+Name,Equation,Description
+Total Subject Alignment,Σ S_i,Cumulative alignment across all issues. Positive = overall conformity; negative = overall opposition.
+Total Majority Strength (Signed),Σ M_i,Measures whether the overall set of policies tends toward majority agreement or disagreement. Used mainly for diagnostics.
+Total Majority Magnitude,Σ |M_i|,Sum of absolute majority strengths. Represents total “alignment potential” of the dataset. Always positive.
+S-Score (Subject Score),S_i = (A or D) * (Net Support_i) * (Salience_i),"Respondent’s stance on issue i, showing whether they align (+1) or oppose (−1) the majority, weighted by salience and support strength."
+Response Sign,"A or D = +1 if Agree/Strongly Agree, -1 if Disagree/Strongly Disagree",Converts the respondent’s answer into +1 or −1 for calculation.
+Overall Alignment Index,Normie–Contrarian Score = (Σ S_i) / (Σ |M_i|),Bounded between −1 and +1. +1 = full alignment with majority (100% normie); −1 = full opposition (100% contrarian).
+M-Score (Majority Score),M_i = (Net Support_i) * (Salience_i),Represents the strength and salience of majority opinion on issue i. Positive = majority supports; negative = majority opposes.
+Dispersion / Consistency,SD_Δ = sqrt( Σ(Δ_i − mean(Δ))^2 / (n−1) ),Standard deviation of deviations. Low = consistent normie or contrarian; high = mixed or inconsistent alignment.
+Deviation per Issue,Δ_i = S_i - M_i,Difference between the individual’s stance and the majority stance for each policy. Larger |Δ| = greater divergence.

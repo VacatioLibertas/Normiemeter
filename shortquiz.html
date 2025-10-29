@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Normiemeter — Short Quiz</title>
+        <link rel="icon" type="image/x-icon" href="favico.png">
+        <link href="./styles/style.css" rel="stylesheet" type="text/css" media="all">
+      </head>
+    
+    <body>
+        <audio id="squeak" src="./images/squeak.mp3" preload="auto"></audio>
+        <div id="logo">
+            <a href="https://onlytothinking.com"><img width=40px height=40px src="favico.png"></a>
+        </div>
+        <div id="header">
+            <h2><a href="https://onlytothinking.com">Only To Thinking</a></h2>
+            <div onclick="document.getElementById('squeak').play();" id="toy" style="float: right;"><img width="40px" height="40px" src="./images/ducky.png"></div>
+        </div>
+        <div id="content" style="margin-left: 10%; margin-right: 10%;">
+            <div id="question">
+                <div id="proposal" style="text-align:center; margin-left:20%; margin-right: 20%;">
+                    <!-- Populated by scripts/shortquiz.js -->
+                </div>
+                <div id="lefttake">
+                </div>
+                <div id="righttake">
+                </div>
+            </div>
+            <p style="font-size: 24px; margin-bottom: 5px;">
+                Do you support this proposal?
+            </p>
+            <!-- Controls will be injected here by scripts/shortquiz.js -->
+            <div id="quizControlsPlaceholder"></div>
+        </div>
+    </body>
+    <script src="./scripts/shortquiz.js"></script>
+</html>
