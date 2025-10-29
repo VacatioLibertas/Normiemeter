@@ -90,10 +90,7 @@ Fonts (from Substack):
     font-size: 29px;
   }
 
-  button {
-    text-align: center;
-  }
-
+  /* the big one */
   .button {
     font-family: Georgia;
     text-align: center;
@@ -109,6 +106,7 @@ Fonts (from Substack):
     font-size: 24px;
   }
 
+  /* the small one */
   .button2 {
     font-family: Georgia;
     text-align: center;
@@ -130,8 +128,32 @@ Fonts (from Substack):
     cursor: pointer;
   }
 
-  .fadein {
-    animation: fadeIn 2s ease-in-out forwards;
+  #proposal {
+    margin-top: 10px;
+    border: solid 1px #f3f3f3;
+    border-radius: 4px;
+  }
+
+  #lefttake {
+    margin-left: 5%;
+    margin-top: 15px;
+    border: solid 1px #f3f3f3;
+    border-radius: 4px;
+    float: left;
+    width: 40%;
+    animation: slideInLeft 3s ease-in-out forwards;
+    animation-fill-mode: forwards; 
+  }
+  
+  #righttake {
+    margin-right: 5%;
+    margin-top: 30px;
+    border: solid 1px #f3f3f3;
+    border-radius: 4px;
+    float: right;
+    width: 40%;
+    animation: slideInRight, fadeIn 3s ease-in-out forwards;
+    animation-fill-mode: forwards; 
   }
 
   @keyframes fadeIn {
@@ -143,14 +165,18 @@ Fonts (from Substack):
     }
   }
 
-  .slidein {
-    transform: translateX(-100%);
-    animation: slideIn 2s ease-in-out forwards;
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-300%); 
+    }
+    to {
+      transform: translateX(0%); 
+    }
   }
 
-  @keyframes slideIn {
+  @keyframes slideInRight {
     from {
-      transform: translateX(-100%); 
+      transform: translateX(445%); 
     }
     to {
       transform: translateX(0%); 
