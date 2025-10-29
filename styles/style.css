@@ -46,7 +46,6 @@ Fonts (from Substack):
     margin-left: 20%;
     margin-right: 20%;
     margin-bottom: 0px;
-    overflow: auto;
   }
 
   #logo {
@@ -126,65 +125,76 @@ Fonts (from Substack):
 
   #question {
     margin-bottom: 0px;
-    overflow-x: hidden;
+    overflow-x: hidden; 
   }
 
   #proposal {
     justify-content: center;
     display: flex;
+    flex-direction: column;
     margin-top: 10px;
     border: solid 1px #756c69;
     border-radius: 4px;
     background-color: #443e3c;
-    font-size: 24px;
+    overflow-wrap: break-word;
+    text-align: center;
   }
 
   #lefttake {
     display: flex;
-    margin-left: 5%;
     margin-top: 15px;
     border: solid 1px #756c69;
     border-radius: 4px;
     float: left;
-    width: 40%;
+    width: 48%;
     animation: slideInLeft 2s, fadeIn 4s;
     padding: 3px 3px -3px 3px;
+    padding-left: 3px;
     background-color: #443e3c;
     display: block;
     margin-bottom: 30px;
+    overflow-wrap: break-word;
+    text-align: left;
   }
   
   #righttake {
     display: flex;
-    margin-right: 5%;
+    flex-direction: row;
     margin-top: 45px;
     border: solid 1px #756c69;
     border-radius: 4px;
     float: right;
-    width: 40%;
-    animation: slideInRight 2s, fadeIn 4s;
+    width: 48%;
+    animation: slideInRight 3s, fadeIn 6s;
     padding: 3px 3px -3px 3px;
+    padding-right: 3px;
     background-color: #443e3c;
     display: block;
+    overflow-wrap: break-word;
+    text-align: right;
   }
 
   .dem {
     display: flex;
-    color: #006391;
+    background-color: #006391;
     font-size: 20px;
     font-weight: bold;
     text-align: left;
     margin: 3px;
+    width: fit-content;
+    margin-right: auto;
   }
 
   .rep {
     display: flex;
     flex-direction: column; 
-    color: #E24A38;
+    background-color: #E24A38;
     font-size: 20px;
     font-weight: bold;
     text-align: right;
     margin: 3px;
+    width: fit-content;
+    margin-left: auto;
   }
 
   @keyframes fadeIn {
@@ -207,7 +217,7 @@ Fonts (from Substack):
 
   @keyframes slideInRight {
     from {
-      transform: translateX(445%);
+      transform: translateX(1200%);
     }
     to {
       transform: translateX(0%); 
@@ -219,6 +229,7 @@ Fonts (from Substack):
     #proposal {
       flex-direction: column;
       width: 300px;
+      float: none;
     } 
 
     #lefttake {
