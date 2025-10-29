@@ -141,7 +141,7 @@ Fonts (from Substack):
     border-radius: 4px;
     float: left;
     width: 40%;
-    animation: slideInLeft 3s ease-in-out forwards;
+    animation: slideInLeft 2s, fadeIn 3s;
     animation-fill-mode: forwards; 
   }
   
@@ -152,8 +152,7 @@ Fonts (from Substack):
     border-radius: 4px;
     float: right;
     width: 40%;
-    animation: slideInRight, fadeIn 3s ease-in-out forwards;
-    animation-fill-mode: forwards; 
+    animation: slideInRight 2s, fadeIn 3s;
   }
 
   @keyframes fadeIn {
@@ -176,7 +175,7 @@ Fonts (from Substack):
 
   @keyframes slideInRight {
     from {
-      transform: translateX(445%); 
+      transform: translateX(445%);
     }
     to {
       transform: translateX(0%); 
