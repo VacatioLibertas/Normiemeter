@@ -14,19 +14,21 @@ Positive/Negative:
     #e67c73 (Red)
 
 Political:
-    #006391 (Republican Red)
-    #E24A38 (Democrat Blue)
+    #006391 (Democrat Blue)
+    #E24A38 (Republican Red)
 
 OTT Yellow:
     #FCBA04
+
+Fonts (from Substack):
+    Classic Serif (Text) - Googling reveals this is either Georgia or Spectral
+    Inconsolata (Headings)
 */
 
-/*
-Fonts (from Substack):
-    Mono (Headings) - looks like JetBrains Mono kind of
-    Classic Serif (Text) - Googling reveals this is either Georgia or Spectral
-    Inconsolata (Other - example?) 
-*/
+  html {
+    scrollbar-width: 4px;
+    scrollbar-color: #f3f3f3, #ffffff;
+  }
 
   body {
     background-color: #292524;
@@ -34,11 +36,12 @@ Fonts (from Substack):
     font-family: Georgia;
     font-size: 16px;
     margin: 0px;
+    text-align: center;
   }
 
   #header {
     border-bottom: 0.5px solid #443e3c;
-    padding: 5px 5px 0px 0px; 
+    padding-top: 2px;
     text-align: center;
     font-size: 12px;
   }
@@ -67,12 +70,40 @@ Fonts (from Substack):
     text-decoration: underline;
   }
   
-  h1 {
-    font-family: "JetBrains Mono";
+  h1, h1 a, h1 a:hover {
+    font-family: "Inconsolata";    
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 29px;
+  }
+
+  .button {
+    font-family: Georgia;
+    text-align: center;
+    display: inline-block;
+    color: #ffffff;
+    background-color: #FCBA04;
+    border-radius: 15%;
+    width: max-content;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    padding: 4px;
+    border: none;
+    font-size: 16px;
+  }
+
+  .button:hover {
+    text-decoration: none;
+    background-color: #e3a703;
+    cursor: pointer;
+  }
+
+  .button + .button {
+    margin-left: 15px; 
   }
 
   @font-face {
-    font-family: "JetBrains Mono";
-    src: url(../fonts/JetBrainsMono-VariableFont_wght.ttf) format(truetype);
+    font-family: "Inconsolata";
+    src: url(../fonts/Inconsolata.ttf) format(truetype);
   }
   
