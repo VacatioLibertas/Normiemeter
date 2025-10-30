@@ -123,22 +123,6 @@
 		p.textContent = policyText;
 		proposal.appendChild(p);
 
-		// Ensure the proposal fades in on the first render only. If content is injected
-		// after CSS animations have already run, reapply the animation once.
-		try {
-			if (!state._proposalAnimated) {
-				proposal.style.animation = 'none';
-				// force reflow
-				void proposal.offsetWidth;
-				proposal.style.animation = 'fadeIn 6s ease';
-				state._proposalAnimated = true;
-			} else {
-				proposal.style.animation = '';
-			}
-		} catch (e) {
-			// ignore failures
-		}
-
 		// left / right arguments - short quiz: show a single randomly chosen argument from each side
 		left.innerHTML = '';
 		right.innerHTML = '';

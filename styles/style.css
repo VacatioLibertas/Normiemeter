@@ -85,9 +85,7 @@ Fonts (from Substack):
     font-family: "Inconsolata";    
     color: #ffffff;
     text-decoration: none;
-    font-size: 34px;
-    margin-left: -30px;
-    margin-right: -30px;
+    font-size: 29px;
   }
 
   /* wordmark */
@@ -95,7 +93,7 @@ Fonts (from Substack):
     font-family: "Inconsolata";    
     color: #ffffff;
     text-decoration: none;
-    font-size: 29px;
+    font-size: 24px;
   }
 
   /* the big one */
@@ -300,6 +298,8 @@ Fonts (from Substack):
       padding: 8px;
       overflow: visible;
     }
+
+    
   }
 
   @font-face {

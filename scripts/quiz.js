@@ -285,6 +285,8 @@
 		agree.className = 'button';
 		agree.textContent = 'Agree';
 		agree.style.marginRight = '10px';
+		agree.style.marginLeft = '10px';
+		agree.style.marginBottom = '0px';
 		agree.onclick = () => {
 			const q = state.questions[state.index];
 			const contrib = computeContribution(q, 'agree');
@@ -298,6 +300,7 @@
 		disagree.id = 'disagreeBtn';
 		disagree.className = 'button';
 		disagree.textContent = 'Disagree';
+		disagree.style.marginRight = '0px';
 		disagree.onclick = () => {
 			const q = state.questions[state.index];
 			const contrib = computeContribution(q, 'disagree');
