@@ -117,6 +117,22 @@
 		p.textContent = policyText;
 		proposal.appendChild(p);
 
+		// Ensure the proposal fades in on the first render only. If content is injected
+		// after CSS animations have already run, reapply the animation once.
+		try {
+			if (!state._proposalAnimated) {
+				proposal.style.animation = 'none';
+				// force reflow
+				void proposal.offsetWidth;
+				proposal.style.animation = 'fadeIn 6s ease';
+				state._proposalAnimated = true;
+			} else {
+				proposal.style.animation = '';
+			}
+		} catch (e) {
+			// ignore failures
+		}
+
 		// left / right arguments
 		left.innerHTML = '';
 		right.innerHTML = '';
@@ -149,22 +165,7 @@
 		// Update progress and optional debug info
 		const progress = $('progress');
 		if (progress) progress.textContent = `Question ${index + 1} / ${total}`;
-
-		// Re-trigger slide/fade animations on each render so they play when content changes
-		try {
-			// clear and reassign animation to force replay
-			left.style.animation = 'none';
-			right.style.animation = 'none';
-			// force reflow
-			void left.offsetWidth;
-			void right.offsetWidth;
-			// reapply the animations defined in CSS (keep original timing)
-			left.style.animation = 'slideInLeft 2s, fadeIn 4s';
-			right.style.animation = 'slideInRight 3s, fadeIn 6s';
-		} catch (e) {
-			// ignore if elements missing or style assignment fails
-		}
-	}
+}
 
 	// Main quiz state
 	const state = {
@@ -306,11 +307,16 @@
 			nextQuestion();
 		};
 
-		const skip = document.createElement('button');
+		// Skip as plain text (styled paragraph) per design request
+		const skip = document.createElement('p');
 		skip.id = 'skipBtn';
-		// use the same button styling as the Skip-to-end debug button
-		skip.className = 'button3';
-		skip.textContent = 'Skip';
+		skip.style.fontWeight = 'bold';
+		skip.style.color = '#ab9d98';
+		skip.style.fontSize = '18px';
+		skip.style.textDecoration = 'underline';
+		skip.style.cursor = 'pointer';
+		skip.style.margin = '-6px 0 0 0';
+		skip.textContent = 'Skip this question';
 		skip.onclick = () => {
 			const q = state.questions[state.index];
 			const contrib = computeContribution(q, 'skip');
@@ -320,11 +326,17 @@
 		};
 
 		// Skip to end button for debugging: mark remaining unseen questions as skipped and finish
-		const skipToEnd = document.createElement('button');
+		// Skip to end as plain text
+		const skipToEnd = document.createElement('p');
 		skipToEnd.id = 'skipToEndBtn';
-		skipToEnd.className = 'button3';
-		skipToEnd.style.marginLeft = '8px';
-		skipToEnd.textContent = 'Skip to end';
+		skipToEnd.style.color = '#ab9d98';
+		skipToEnd.style.fontSize = '16px';
+		skipToEnd.style.textDecoration = 'underline';
+		skipToEnd.style.cursor = 'pointer';
+		skipToEnd.style.marginLeft = '0px';
+		skipToEnd.style.marginTop = '10px';
+		skipToEnd.style.display = 'inline-block';
+		skipToEnd.textContent = 'Skip to the end of quiz';
 		skipToEnd.onclick = () => {
 			// For any question index not yet recorded in state.answers, add a skip entry
 			for (let j = state.index; j < state.questions.length; j++) {
