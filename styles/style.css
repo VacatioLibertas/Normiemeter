@@ -80,7 +80,7 @@ Fonts (from Substack):
     text-decoration: underline;
   }
   
-  /* normiemeter logo */
+  /* wordmark */
   h1, h1 a, h1 a:hover {
     font-family: "Inconsolata";    
     color: #ffffff;
@@ -88,12 +88,24 @@ Fonts (from Substack):
     font-size: 29px;
   }
 
-  /* wordmark */
+  /* policy titles */
   h2, h2 a, h2 a:hover {
     font-family: "Inconsolata";    
     color: #ffffff;
     text-decoration: none;
     font-size: 24px;
+  }
+
+  /* normiemeter logo */
+  #normielogo img {
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 400px;
+    text-align: center;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 10px;
   }
 
   /* the big one */
@@ -268,6 +280,20 @@ Fonts (from Substack):
   /* mobile support */
   @media (max-width: 820px) {
     *, *::before, *::after { box-sizing: border-box; }
+
+    #content {
+      margin-left: 10%;
+      margin-right: 10%;
+      margin-bottom: 0px;
+      position: relative;
+    }
+
+    #normielogo img {
+      display: block;
+      flex-direction: column;
+      float: none;
+      max-width: 100%;
+    }
 
     #proposal {
       flex-direction: column;
