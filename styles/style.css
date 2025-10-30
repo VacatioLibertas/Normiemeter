@@ -114,10 +114,6 @@ Fonts (from Substack):
     font-size: 24px;
   }
 
-  .button + .button {
-    margin-right: 10px;
-  }
-
   /* the small one */
   .button2 {
     font-family: Georgia;
@@ -133,6 +129,7 @@ Fonts (from Substack):
     font-size: 18px;
   }
 
+  /* iforgot to name this one oops */
   .button3 {
     font-family: Georgia;
     text-align: center;
@@ -272,7 +269,6 @@ Fonts (from Substack):
 
   /* mobile support */
   @media (max-width: 820px) {
-    /* make boxes responsive on small screens */
     *, *::before, *::after { box-sizing: border-box; }
 
     #proposal {
@@ -310,35 +306,3 @@ Fonts (from Substack):
     font-family: "Inconsolata";
     src: url(../fonts/Inconsolata.ttf) format(truetype);
   }
-
-/* Results throbber: small spinner whose color follows the OAI scale */
-.results-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: nowrap; }
-
-.results-left { text-align: left; flex: 1 1 auto; }
-.results-right { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; }
-
-.results-throbber {
-  --throbber-size: 200px;
-  --throbber-color: #625a58; /* neutral fallback */
-  width: var(--throbber-size);
-  height: var(--throbber-size);
-  position: relative;
-  flex: 0 0 auto;
-  display: inline-block;
-}
-
-/* each rectangle placed around the circle; JS will set per-rect transform */
-.results-throbber .rect {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 18px;
-  height: 44px;
-  margin-left: -9px; /* center horizontally */
-  margin-top: -22px;  /* center vertically */
-  border-radius: 3px;
-  background: var(--throbber-color);
-  transform-origin: center center;
-}
-
-.results-throbber.paused { opacity: 0.7; }
