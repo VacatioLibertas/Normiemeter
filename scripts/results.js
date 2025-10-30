@@ -149,9 +149,9 @@
 
     // answered count
     const nonSkipped = (payload.answers || []).filter(a => a && a.answer !== 'skip').length || 0;
-  const answeredP = document.createElement('p');
-  answeredP.textContent = `Answered questions: ${nonSkipped} / ${payload.questions.length}`;
-  leftCol.appendChild(answeredP);
+    const answeredP = document.createElement('p');
+    answeredP.textContent = `Answered questions: ${nonSkipped} / ${payload.questions.length}`;
+    container.appendChild(answeredP);
 
     // show how many times the user agreed or disagreed
     let agreeCount = 0;
@@ -161,9 +161,9 @@
       if (a.answer === 'agree') agreeCount++;
       if (a.answer === 'disagree') disagreeCount++;
     }
-  const countsP = document.createElement('p');
-  countsP.textContent = `Agreed: ${agreeCount} — Disagreed: ${disagreeCount}`;
-  leftCol.appendChild(countsP);
+    const countsP = document.createElement('p');
+    countsP.textContent = `Agreed: ${agreeCount} — Disagreed: ${disagreeCount}`;
+    container.appendChild(countsP);
 
     // breakdown list
     const divider = document.createElement('hr');
