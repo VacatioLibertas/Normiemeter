@@ -187,7 +187,11 @@
 		// do u agree tbh
 		const yesNo = document.createElement('p');
 		yesNo.style.fontSize = '24px';
+		if (window.innerWidth < 601) {
+			yesNo.style.fontSize = '19px';
+		}
 		yesNo.textContent = 'This proposal should be implemented.';
+		yesNo.style.marginTop = '0px'; 
 		yesNo.style.marginBottom = '0px';
 
 		// agree button
