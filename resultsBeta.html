@@ -1,35 +1,68 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Normiemeter Results</title>
-        <link rel="icon" type="image/x-icon" href="favico.png">
-        <link href="./styles/style.css" rel="stylesheet" type="text/css" media="all">
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>Normiemeter Results</title>
+      <link rel="icon" type="image/x-icon" href="favico.png">
+      <link href="./styles/style.css" rel="stylesheet" type="text/css" media="all">
     </head>
   
     <body>
-        <div id="header">
-            <div id="logo">
-                <a href="https://onlytothinking.com">
-                <img src="favico.png" alt="The logo for 'Only To Thinking'"></a>
-            </div>
-            <div id="toy" onclick="document.getElementById('squeak').play();">
-                <audio id="squeak" src="./images/squeak.mp3" preload="auto"></audio>
-                <img alt="a picture of a rubber ducky" src="./images/ducky.png">
-            </div>
-            <a href="https://onlytothinking.com"><h1>Only To Thinking</h1></a>
+      <div id="header">
+      <div id="logo"> 
+            <a href="https://onlytothinking.com">
+            <img src="favico.png" alt="The logo for 'Only To Thinking'"></a>
         </div>
-        
-    <div id="content" style="margin-left:10%; margin-right:10%;">
-      <span id="throbber"></span>
-      <span id="spectrum"></span>
-      <div id="resultsContainer" style="text-align:center; margin-top:12px;"></div>
-      <div style="text-align:center; margin-top:18px;">
-        <button id="restartBtn" class="button2">Restart the quiz</button>
+        <div id="toy" onclick="document.getElementById('squeak').play();">
+            <audio id="squeak" src="./images/squeak.mp3" preload="auto"></audio>
+            <img alt="a picture of a rubber ducky" src="./images/ducky.png">
+        </div>
+        <h1><a href="https://onlytothinking.com">Only To Thinking</a></h1>
       </div>
-    </div>
 
-    <script src="./scripts/results.js"></script>
-  </body>
+      <div id="content" style="margin-left:10%; margin-right:10%;"><span id="resultWrap">
+      <!-- start building outline for results page -->
+        <h3>You are <b>FUCKING INSANE!</b></h3>
+        <div id="resultDesc">
+          <p>
+            Your views are more extreme than 99.9% of Americans. You might want to consider seeking professional help. -- help the automatic AI generated this lol
+            <br>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id lorem vel dui euismod elementum. Curabitur sed nibh non urna pulvinar interdum. Vestibulum eu purus id ex auctor pulvinar in sed mauris. Morbi auctor viverra sodales. Mauris vitae sapien nec sem convallis porta. Fusce sodales ligula sodales neque vehicula, non dapibus ipsum sodales. Integer luctus lacus non ullamcorper vestibulum. 
+        </div>
+        <div id="throbber">
+          <div class="rectangle"></div>
+          <div class="rectangle"></div>
+          <div class="rectangle"></div>
+          <div class="rectangle"></div>
+          <div class="rectangle"></div>
+          <div class="rectangle"></div>
+          <div class="rectangle"></div>
+          <div class="rectangle"></div>
+          <div class="rectangle"></div>
+          <div class="rectangle"></div>
+          <div class="rectangle"></div>
+          <div class="rectangle"></div>
+          <div id="percentage">99%</div>
+          <div id="result">DEVIANT</div>
+        </div>
+      </div></span>
+    <script>
+      function positionThrobber() {
+        if (window.innerWidth <= 820) {
+          throbber.style.position = 'relative';
+          return;
+        }
+        const desc = document.getElementById('resultDesc');
+        const throbber = document.getElementById('throbber');
+        const descHeight = desc.offsetHeight;
+        const throbberHeight = throbber.offsetHeight;
+        const offset = (descHeight - throbberHeight) / 2;
+        throbber.style.top = desc.offsetTop + offset + 'px';
+        throbber.style.left = (desc.offsetLeft + desc.offsetWidth + 50) + 'px';
+      }
+    window.addEventListener('load', positionThrobber);
+    window.addEventListener('resize', positionThrobber);
+    </script>
+    </body>
 </html>

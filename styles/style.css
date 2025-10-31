@@ -51,6 +51,7 @@ Fonts (from Substack):
     margin-right: 20%;
     margin-bottom: 0px;
     position: relative;
+    display: block;
   }
 
   #logo {
@@ -88,8 +89,8 @@ Fonts (from Substack):
   h1, h1 a, h1 a:hover {
     font-family: "Inconsolata";    
     color: #ffffff;
-    text-decoration: none;
     font-size: 29px;
+    text-decoration: none;
   }
 
   /* policy titles */
@@ -98,6 +99,20 @@ Fonts (from Substack):
     color: #ffffff;
     text-decoration: none;
     font-size: 24px;
+  }
+
+  /* result title */
+  h3 {
+    font-family: "Inconsolata";    
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 22px;
+    text-align: left;
+  }
+
+  /* name for the result */
+  h3 b {
+    animation: fadeIn 2s;
   }
 
   /* normiemeter logo */
@@ -142,22 +157,6 @@ Fonts (from Substack):
     border: none;
     font-size: 18px;
     margin: 0 auto;
-  }
-
-  /* iforgot to name this one oops */
-  .button3 {
-    font-family: "Georgia";
-    text-align: center;
-    display: inline-block;
-    color: #ffffff;
-    background-color: #625a58;
-    border-radius: 5px;
-    width: 230px;
-    margin-top: 15px;
-    margin-bottom: 20px;
-    padding: 4px;
-    border: none;
-    font-size: 24px;
   }
 
   .button:hover, .button2:hover {
@@ -249,18 +248,96 @@ Fonts (from Substack):
     margin-left: auto;
   }
 
-  #spectrum {
-    height: 10px;
-    text-align: center;
-    background: linear-gradient(90deg, #e67c73, #756c69, #57bb8a);
+  #resultDesc {
+    display: flex;
+    float: left;
+    width: 450px;
+    margin-right: 50px;
+    padding: 5px;
+    border: solid 1px #756c69;
+    border-radius: 4px;
+    background-color: #443e3c;
+    overflow-wrap: break-word;
+    text-align: left;
+    opacity: 0;
+    animation: fadeIn 4s 1s forwards;
+    position: relative;
   }
 
   #throbber {
-    color: #756c69;
-    overflow: hidden;
-    position: relative;
-    transform: translateZ(0);
-    animation: fadeIn 4s;
+    display: flex;
+    width: 275px;
+    height: 275px;
+    position: absolute;
+    opacity: 0;
+    animation: fadeIn 4s 1.5s forwards;
+    margin-left: 50px;
+  }
+
+  .rectangle {
+    width: 30px;
+    height: 65px;
+    background-color: #e67c73;
+    border-radius: 6px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: 
+      translate(-50%, -50%)
+      rotate(calc(var(--i) * 30deg))
+      translate(80px)
+      rotate(calc(var(--i) * -30deg))
+      rotate(var(--angle, 0deg));
+  }
+
+  .rectangle:nth-child(1)  { --i: 0; --angle: 90deg;}
+  .rectangle:nth-child(2)  { --i: 1; --angle: 120deg;}
+  .rectangle:nth-child(3)  { --i: 2; --angle: 150deg;}
+  .rectangle:nth-child(4)  { --i: 3; --angle: 180deg;}
+  .rectangle:nth-child(5)  { --i: 4; --angle: 210deg;}
+  .rectangle:nth-child(6)  { --i: 5; --angle: 240deg;}
+  .rectangle:nth-child(7)  { --i: 6; --angle: 270deg;}
+  .rectangle:nth-child(8)  { --i: 7; --angle: 300deg;}
+  .rectangle:nth-child(9)  { --i: 8; --angle: 330deg;}
+  .rectangle:nth-child(10) { --i: 9; --angle: 360deg;}
+  .rectangle:nth-child(11) { --i: 10; --angle: 390deg;}
+  .rectangle:nth-child(12) { --i: 11; --angle: 410deg;}
+
+  #throbber::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 135px;
+    height: 135px;
+    background-color: #292524;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  #percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -90%);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Inconsolata";
+    font-size: 50px;
+    z-index: 1;
+  }
+
+  #result {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -10%);
+    color: white;
+    font-size: 20px;
+    font-family: "Inconsolata";
+    font-size: 32px;
+    z-index: 1;
   }
 
   @keyframes fadeIn {
@@ -316,7 +393,60 @@ Fonts (from Substack):
       padding: 8px;
       overflow: visible;
     }
-    
+
+    #resultWrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #throbber {
+      order: -1; /* move above description */
+      position: static;
+      margin: 20px auto 20px auto;
+      width: 200px;
+      height: 200px;
+      display: block; 
+      animation: fadeIn 4s 1s forwards;
+    }
+
+    #resultDesc {
+      order: 0;
+      float: none;
+      width: 100%;
+      margin: 0 auto 12px auto;
+      animation: fadeIn 4s 1.5s forwards;
+    }
+
+    h3 {
+      flex-direction: column;
+      order: -2;
+    }
+
+    .rectangle {
+    left: 50%;
+    top: 25%;
+    }
+
+    #throbber::after {
+      left: 50%;
+      top: 25%;
+    }
+
+    #percentage, #result {
+      left: 50%;
+      top: 25%;
+      transform: translate(-50%, -50%);
+    }
+
+    #percentage {
+      transform: translate(-50%, -90%);
+    }
+
+    #result {
+      transform: translate(-50%, -10%);
+    }
+      
     .button, .button2 {
       max-width: 100%;
     }
