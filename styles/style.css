@@ -28,7 +28,7 @@ Fonts (from Substack):
   body {
     background-color: #292524;
     color: #ffffff;
-    font-family: Georgia;
+    font-family: "Georgia";
     font-size: 16px;
     margin: 0px;
     text-align: center;
@@ -37,9 +37,13 @@ Fonts (from Substack):
 
   #header {
     border-bottom: 0.5px solid #443e3c;
-    padding-top: 2px;
     text-align: center;
-    font-size: 12px;
+    display: block;
+  }
+
+  #header img {
+     width: 40px;
+     height: 40px;
   }
 
   #content {
@@ -50,15 +54,13 @@ Fonts (from Substack):
   }
 
   #logo {
-    background-color: #ffffff;
-    border-radius: 20%;
-    height: 40px;
-    width: 40px;
-    margin: 15px 25px;
-    padding: 0px;
     position: absolute;
-    float: left;
-    margin-right: 10px;
+    background-color: #ffffff;
+    border-radius: 24%;
+    top: 15px;
+    left: 25px;
+    width: 40px;
+    height: 40px;
   }
 
   /* stand-in for social media share button */
@@ -112,7 +114,7 @@ Fonts (from Substack):
 
   /* the big one */
   .button {
-    font-family: Georgia;
+    font-family: "Georgia";
     text-align: center;
     display: inline-block;
     color: #ffffff;
@@ -128,7 +130,7 @@ Fonts (from Substack):
 
   /* the small one for big quiz */
   .button2 {
-    font-family: Georgia;
+    font-family: "Georgia";
     text-align: center;
     display: inline-block;
     color: #ffffff;
@@ -144,7 +146,7 @@ Fonts (from Substack):
 
   /* iforgot to name this one oops */
   .button3 {
-    font-family: Georgia;
+    font-family: "Georgia";
     text-align: center;
     display: inline-block;
     color: #ffffff;
@@ -253,6 +255,14 @@ Fonts (from Substack):
     background: linear-gradient(90deg, #e67c73, #756c69, #57bb8a);
   }
 
+  #throbber {
+    color: #756c69;
+    overflow: hidden;
+    position: relative;
+    transform: translateZ(0);
+    animation: fadeIn 4s;
+  }
+
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -298,51 +308,62 @@ Fonts (from Substack):
       max-width: 100%;
     }
 
-    #proposal {
+    #proposal, #lefttake, #righttake {
       flex-direction: column;
       float: none;
       width: 100%;
-    
       margin: 0 auto 12px auto; 
       padding: 8px;
       overflow: visible;
     }
-
-    #lefttake {
-      flex-direction: column;
-      float: none;
-      width: 100%;
-
-      margin: 0 auto 12px auto; 
-      padding: 8px;
-      overflow: visible;
-    }
-
-    #righttake {
-      flex-direction: column;
-      float: none;
-      width: 100%;
     
-      margin: 0 auto 12px auto;
-      padding: 8px;
-      overflow: visible;
-    }
-    
-    .button {
+    .button, .button2 {
       max-width: 100%;
     }
 
-    .button2 {
-      max-width: 100%;
+    #header {
+      display: flex;
+      align-items: center;
+      height: 44px;
+      justify-content: center;
+      line-height: 32px; 
+      border: none;
+      padding-top: 12px;
     }
 
-    h1 {
-      /*font-size: 20px;*/
+    #header h1 {
+      font-size: 20px;
     }
+
+    #header img {
+      width: 32px;
+      height: 32px;
+      margin: 0 auto;
+    }
+
+    #logo, #toy {
+      margin: 0 auto;
+      width: 32px;
+      height: 32px;
+      top: 12px;
+    }
+    
+    #logo {
+      left: 17px;
+    }
+
+    #toy {
+      right: 17px;
+    }
+
   }
-
 
   @font-face {
     font-family: "Inconsolata";
     src: url(../fonts/Inconsolata.ttf) format(truetype);
+  }
+
+  @font-face {
+    font-family: "Georgia";
+    src: url(../fonts/Georgia.ttf) format(truetype);
   }
