@@ -186,8 +186,9 @@
 		// do u agree tbh
 		const yesNo = document.createElement('p');
 		yesNo.style.fontSize = '24px';
+		yesNo.style.textAlign = 'center';
 		if (window.innerWidth < 601) {
-			yesNo.style.fontSize = '19px';
+			yesNo.style.fontSize = '16px';
 		}
 		yesNo.textContent = 'This proposal should be implemented.';
 		yesNo.style.marginTop = '0px';
@@ -201,6 +202,7 @@
 		agree.style.fontFamily = 'Inconsolata';
 		agree.style.fontWeight = 'bold';
 		agree.style.marginBottom = '0px'
+		agree.style.marginTop = '0px';
 		agree.onclick = () => {
 			const q = state.questions[state.index];
 			const contrib = computeContribution(q, 'agree');
@@ -217,7 +219,8 @@
 		disagree.style.fontFamily = 'Inconsolata';
 		disagree.style.fontWeight = 'bold'
 		disagree.style.marginRight = '0px';
-		disagree.style.marginBottom = '0px';
+		disagree.style.marginBottom = '0px'
+		disagree.style.marginTop = '5px';
 		disagree.onclick = () => {
 			const q = state.questions[state.index];
 			const contrib = computeContribution(q, 'disagree');
@@ -243,7 +246,7 @@
 		back.style.fontFamily = 'Inconsolata';
 		back.textContent = '⏮ PREV.';
 		back.style.margin = '0 auto';
-		back.style.marginTop = '0px';
+		back.style.marginTop = '2px';
 		back.style.display = 'inline-block';
 		// prev question
 		// adjust score
@@ -281,7 +284,7 @@
 		skip.textContent = 'SKIP ⏭';
 		skip.style.width = 'fit-content';
 		skip.style.margin = '0 auto';
-		skip.style.marginTop = '0px';
+		skip.style.marginTop = '2px';
 		skip.style.display = 'inline-block';
 		// skips, 0 contrib
 		skip.onclick = () => {
@@ -299,7 +302,8 @@
 		skipToEnd.style.textDecoration = 'underline';
 		skipToEnd.style.cursor = 'pointer';
 		skipToEnd.style.marginLeft = '0px';
-		skipToEnd.style.marginTop = '10px';
+		skipToEnd.style.marginTop = '5px';
+		skipToEnd.style.marginBottom = '0px';
 		skipToEnd.style.display = 'inline-block';
 		skipToEnd.textContent = 'Skip to the end of quiz';
 		// skip = contrib 0
@@ -323,7 +327,9 @@
 
 		// remove spacer on small screens
 		if (window.innerWidth < 601) {
-			spacer.style.width = '0px';
+			spacer.style.width = '15px';
+			agree.style.width = '155px'
+			disagree.style.width = '155px'
 		}
 
 		const spacer2 = document.createElement('span');
@@ -332,7 +338,7 @@
 
 		// all the buttons!!!!!!!!
 		controls.id = 'quizControls';
-		controls.style.marginTop = '10px';
+		controls.style.paddingTop = '10px';
 		controls.appendChild(yesNo);
 		controls.appendChild(agree);
 			controls.appendChild(spacer);

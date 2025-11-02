@@ -33,7 +33,6 @@ Fonts (from Substack):
     font-size: 16px;
     margin: 0px;
     text-align: center;
-    overflow-x: hidden;
     margin-bottom: 15px;
   }
 
@@ -129,6 +128,11 @@ Fonts (from Substack):
     margin-top: 10px;
   }
 
+  #intro {
+    margin-left: 150px;
+    margin-right: 150px;
+  }
+
   /* the big one */
   .button {
     /* font-family: "Georgia"; */
@@ -151,7 +155,8 @@ Fonts (from Substack):
     text-align: center;
     display: inline-block;
     color: #ffffff;
-    background-color: #FCBA04;
+    border: 2px solid blue;
+    background-color: transparent;
     border-radius: 5px;
     width: max-content;
     margin-bottom: 15px;
@@ -161,12 +166,12 @@ Fonts (from Substack):
     margin: 0 auto;
   }
 
-  .button:hover, .button2:hover {
+  .button:hover {
     text-decoration: none;
     background-color: #e3a703;
     cursor: pointer;
   }
-
+  
   .button3:hover {
     text-decoration: none;
     background-color: #443e3c;
@@ -174,8 +179,10 @@ Fonts (from Substack):
   }
 
   #question {
-    margin-bottom: 0px;
     overflow-x: hidden; 
+    overflow-y: auto; 
+    max-height: 350px;
+    padding-bottom: 8px;
   }
 
   #proposal {
@@ -257,6 +264,15 @@ Fonts (from Substack):
     margin-bottom: 0px;
     padding: 2px;
   }
+
+  #quizControls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #292524;
+    height: 125px;
+} 
 
   #resultDesc {
     display: flex;
@@ -386,6 +402,8 @@ Fonts (from Substack):
       margin-right: 10%;
       margin-bottom: 0px;
       position: relative;
+      height: 325;
+      overflow-y: scroll;
     }
 
     #normielogo img {
@@ -401,7 +419,6 @@ Fonts (from Substack):
       width: 100%;
       margin: 0 auto 12px auto; 
       padding: 8px;
-      overflow: visible;
     }
 
     #resultWrap {
@@ -411,7 +428,7 @@ Fonts (from Substack):
     }
 
     #throbber {
-      order: -1; /* move above description */
+      order: -1;
       position: static;
       margin: 20px auto 20px auto;
       width: 200px;
@@ -495,6 +512,23 @@ Fonts (from Substack):
     #toy {
       right: 17px;
     }
+
+    #intro {
+    margin-left: 0px;
+    margin-right: 0px;
+    }
+
+    #quizControls {
+      position: fixed;
+      height: fit-content;
+    } 
+
+    #question {
+      overflow-x: hidden;  
+      max-height: 100%;
+      padding-bottom: 0px;
+    }   
+
   }
 
   @font-face {
