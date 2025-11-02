@@ -75,7 +75,7 @@
 		left.innerHTML = '';
 		const dHeader = document.createElement('p');
 		dHeader.className = 'dem';
-		dHeader.textContent = 'Democrats say...';
+		dHeader.textContent = 'DEMOCRATS SAY...';
 		left.appendChild(dHeader);
 		const demArgs = [];
 		if (q['Democratic Argument 1'] && q['Democratic Argument 1']) demArgs.push(q['Democratic Argument 1']);
@@ -89,7 +89,7 @@
 		right.innerHTML = '';
 		const rHeader = document.createElement('p');
 		rHeader.className = 'rep';
-		rHeader.textContent = 'Republicans say...';
+		rHeader.textContent = 'REPUBLICANS SAY...';
 		right.appendChild(rHeader);
 		const repArgs = [];
 		if (q['Republican Argument 1'] && q['Republican Argument 1']) repArgs.push(q['Republican Argument 1']);
@@ -198,7 +198,7 @@
 		const agree = document.createElement('button');
 		agree.id = 'agreeBtn';
 		agree.className = 'button';
-		agree.textContent = 'Agree';
+		agree.textContent = 'AGREE';
 		agree.style.fontFamily = 'Inconsolata';
 		agree.style.fontWeight = 'bold';
 		agree.style.marginBottom = '0px'
@@ -214,7 +214,7 @@
 		const disagree = document.createElement('button');
 		disagree.id = 'disagreeBtn';
 		disagree.className = 'button';
-		disagree.textContent = 'Disagree';
+		disagree.textContent = 'DISAGREE';
 		disagree.style.fontFamily = 'Inconsolata';
 		disagree.style.fontWeight = 'bold'
 		disagree.style.marginRight = '0px';
@@ -231,6 +231,7 @@
 		const back = document.createElement('p');
 		back.id = 'backBtn';
 		back.style.fontWeight = 'bold';
+		back.style.fontSize = '20px';
 		back.style.color = '#ab9d98';
 		back.onmouseover = () => {
 			back.style.color = '#7a605b';
@@ -238,15 +239,13 @@
 		back.onmouseout = () => {
 			back.style.color = '#ab9d98';
 		};
-		back.style.fontSize = '40px';
 		back.style.textDecoration = 'underline'
 		back.style.cursor = 'pointer';
 		back.style.fontFamily = 'Inconsolata';
-		back.textContent = '⏮';
+		back.textContent = '⏮ PREV.';
 		back.style.margin = '0 auto';
 		back.style.marginTop = '0px';
 		back.style.display = 'inline-block';
-		back.style.width = 'fit-content';
 		// prev question
 		// adjust score
 		back.onclick = () => {
@@ -270,17 +269,17 @@
 		skip.id = 'skipBtn';
 		skip.style.fontWeight = 'bold';
 		skip.style.color = '#ab9d98';
+		skip.style.fontSize = '20px';
 		skip.onmouseover = () => {
 			skip.style.color = '#7a605b';
 		};
 		skip.onmouseout = () => {
 			skip.style.color = '#ab9d98';
 		};
-		skip.style.fontSize = '40px';
 		skip.style.fontFamily = 'Inconsolata';
 		skip.style.textDecoration = 'underline';
 		skip.style.cursor = 'pointer';
-		skip.textContent = '⏭';
+		skip.textContent = 'SKIP ⏭';
 		skip.style.width = 'fit-content';
 		skip.style.margin = '0 auto';
 		skip.style.marginTop = '0px';

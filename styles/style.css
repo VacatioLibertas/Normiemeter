@@ -28,11 +28,13 @@ Fonts (from Substack):
   body {
     background-color: #292524;
     color: #ffffff;
-    font-family: "Georgia";
+    /* font-family: "Georgia"; */
+    font-family: "Inconsolata";
     font-size: 16px;
     margin: 0px;
     text-align: center;
     overflow-x: hidden;
+    margin-bottom: 15px;
   }
 
   #header {
@@ -129,7 +131,7 @@ Fonts (from Substack):
 
   /* the big one */
   .button {
-    font-family: "Georgia";
+    /* font-family: "Georgia"; */
     text-align: center;
     display: inline-block;
     color: #ffffff;
@@ -145,7 +147,7 @@ Fonts (from Substack):
 
   /* the small one for big quiz */
   .button2 {
-    font-family: "Georgia";
+    /* font-family: "Georgia"; */
     text-align: center;
     display: inline-block;
     color: #ffffff;
@@ -155,7 +157,7 @@ Fonts (from Substack):
     margin-bottom: 15px;
     padding: 4px;
     border: none;
-    font-size: 18px;
+    font-size: 20px;
     margin: 0 auto;
   }
 
@@ -199,7 +201,6 @@ Fonts (from Substack):
     float: left;
     width: 48%;
     animation: slideInLeft 2s, fadeIn 4s;
-    padding: 3px 3px -3px 3px;
     padding-left: 3px;
     background-color: #443e3c;
     display: block;
@@ -217,12 +218,17 @@ Fonts (from Substack):
     float: right;
     width: 48%;
     animation: slideInRight 3s, fadeIn 6s;
-    padding: 3px 3px -3px 3px;
     padding-right: 3px;
     background-color: #443e3c;
     display: block;
     overflow-wrap: break-word;
     text-align: right;
+  }
+
+  #proposal p, #lefttake p, #righttake p {
+    margin-top: 5px;
+    margin-bottom: 2px;
+    padding: 3px 3px 3px 3px;
   }
 
   .dem {
@@ -234,6 +240,8 @@ Fonts (from Substack):
     margin: 3px;
     width: fit-content;
     margin-right: auto;
+    margin-bottom: 0px;
+    padding: 2px;
   }
 
   .rep {
@@ -246,6 +254,8 @@ Fonts (from Substack):
     margin: 3px;
     width: fit-content;
     margin-left: auto;
+    margin-bottom: 0px;
+    padding: 2px;
   }
 
   #resultDesc {
@@ -485,7 +495,6 @@ Fonts (from Substack):
     #toy {
       right: 17px;
     }
-
   }
 
   @font-face {

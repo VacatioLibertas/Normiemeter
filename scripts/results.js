@@ -187,6 +187,7 @@
 
     // wire restart button — redirect back to short quiz if payload.source === 'short'
     const restart = $id('restartBtn');
+    restart.style.fontFamily = 'Inconsolata';
     if (restart) {
       restart.addEventListener('click', () => {
         localStorage.removeItem('normiemeter_results');
@@ -204,7 +205,8 @@
     // add a "Return to home" button next to the restart button
     const homeBtn = document.createElement('button');
   homeBtn.id = 'homeBtn';
-  homeBtn.textContent = 'Return to home';
+  homeBtn.textContent = 'RETURN HOME';
+  homeBtn.style.fontFamily = 'Inconsolata';
   // give it the same class as the restart button so it matches visually
   if (restart && restart.className) homeBtn.className = restart.className;
   // small visual spacing if inserted next to restart
