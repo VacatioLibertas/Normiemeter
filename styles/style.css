@@ -526,7 +526,8 @@ Fonts (from Substack):
 
     #question {
       overflow-x: hidden;  
-      max-height:100%;
+      max-height: fit-content;
+      margin-bottom: 120px;
       overflow-y: scroll;
     }   
 
