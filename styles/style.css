@@ -131,6 +131,7 @@ Fonts (from Substack):
   #intro {
     margin-left: 150px;
     margin-right: 150px;
+    text-align: justify;
   }
 
   /* the big one */
@@ -517,6 +518,7 @@ Fonts (from Substack):
     #intro {
     margin-left: 0px;
     margin-right: 0px;
+    text-align: justify;
     }
 
     #quizControls {
