@@ -230,6 +230,7 @@ Fonts (from Substack):
     display: block;
     overflow-wrap: break-word;
     text-align: right;
+    margin-bottom: 15px;
   }
 
   #proposal p, #lefttake p, #righttake p {
@@ -272,6 +273,7 @@ Fonts (from Substack):
     width: 100%;
     background-color: #292524;
     height: 125px;
+    margin-top: 0px;
 } 
 
   #resultDesc {
@@ -403,7 +405,6 @@ Fonts (from Substack):
       margin-bottom: 0px;
       position: relative;
       height: 325;
-      overflow-y: scroll;
     }
 
     #normielogo img {
@@ -525,8 +526,8 @@ Fonts (from Substack):
 
     #question {
       overflow-x: hidden;  
-      max-height: 100%;
-      padding-bottom: 0px;
+      max-height:100%;
+      overflow-y: scroll;
     }   
 
   }
