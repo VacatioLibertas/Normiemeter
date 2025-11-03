@@ -221,7 +221,7 @@
 		disagree.style.fontWeight = 'bold'
 		disagree.style.marginRight = '0px';
 		disagree.style.marginBottom = '0px'
-		disagree.style.marginTop = '5px';
+		disagree.style.marginTop = '0px';
 		disagree.onclick = () => {
 			const q = state.questions[state.index];
 			const contrib = computeContribution(q, 'disagree');
@@ -331,6 +331,7 @@
 			spacer.style.width = '15px';
 			agree.style.width = '40%'
 			disagree.style.width = '40%'
+			disagree.style.marginTop = "2px";
 		}
 
 		const spacer2 = document.createElement('span');

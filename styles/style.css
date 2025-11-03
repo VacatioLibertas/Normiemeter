@@ -147,7 +147,7 @@ Fonts (from Substack):
     padding: 4px;
     border: none;
     font-size: 24px;
-    height: 65px;
+
     vertical-align: middle;
   }
 
@@ -164,7 +164,7 @@ Fonts (from Substack):
     border: 2px solid #FCBA04;
     font-size: 16px;
     vertical-align: bottom;
-    height: 65px;
+
     margin-top: 15px;
   }
 
@@ -306,13 +306,14 @@ Fonts (from Substack):
     animation: fadeIn 4s 1.5s forwards;
     margin-left: 50px;
   }
+  
 
   .rectangle {
     width: 30px;
     height: 65px;
-    background-color: #e67c73;
     border-radius: 6px;
     position: absolute;
+    background-color: #FCBA04;
     left: 50%;
     top: 50%;
     transform: 
@@ -371,6 +372,15 @@ Fonts (from Substack):
     font-family: "Inconsolata";
     font-size: 32px;
     z-index: 1;
+  }
+  
+  #resultsContainer {
+    clear: both;
+    padding-top: 4px;
+  }
+
+  #resultWrap {
+    margin-bottom: 10px;
   }
 
   @keyframes fadeIn {
@@ -458,17 +468,17 @@ Fonts (from Substack):
 
     .rectangle {
     left: 50%;
-    top: 25%;
+    top: 14%;
     }
 
     #throbber::after {
       left: 50%;
-      top: 25%;
+      top: 14%;
     }
 
     #percentage, #result {
       left: 50%;
-      top: 25%;
+      top: 14%;
       transform: translate(-50%, -50%);
     }
 
@@ -478,6 +488,10 @@ Fonts (from Substack):
 
     #result {
       transform: translate(-50%, -10%);
+    }
+
+    #resultWrap {
+      margin-bottom: -15px;
     }
       
     .button, .button2 {
@@ -551,3 +565,4 @@ Fonts (from Substack):
     font-family: "Georgia";
     src: url(../fonts/Georgia.ttf) format(truetype);
   }
+

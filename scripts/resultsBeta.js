@@ -2,7 +2,6 @@
 (function() {
   function $id(id) { return document.getElementById(id); }
 
-
   function render() {
     const container = $id('resultsContainer');
     container.innerHTML = '';
@@ -25,17 +24,13 @@
       return;
     }
 
-  // build a header row: left column for title + score + OAI, right column for the throbber
-
-
- 
-
   const title = document.createElement('h1');
   title.textContent = 'Results';
+  leftCol.appendChild(title);
 
   const scoreP = document.createElement('p');
   scoreP.textContent = `Raw score: ${Number(payload.totalScore || 0).toFixed(3)}`;
-  container.appendChild(scoreP);
+  leftCol.appendChild(scoreP);
 
     // compute OAI same as in quiz.js
     let totalMax = 0;
@@ -51,37 +46,21 @@
       // make it from 0 - 100
       oai = ((payload.totalScore / totalMax)+1)/2;
       const pct = (oai * 100).toFixed(1);
-      const pctg = document.createElement('percentage');
-      percentage.textContent = `${Math.trunc(pct)}%`;
+  const p = document.createElement('p');
+  p.textContent = `Overall Alignment Index (OAI): ${pct}%`;
+  leftCol.appendChild(p);
 
-      const type = document.createElement('typology');
-      const typeDesc = document.createElement('resultDesc')
-      if (oai >= 0.9) {
-        typology.textContent = 'EXTREMELY NORMAL';
-        resultDesc.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id lorem vel dui euismod elementum. Curabitur sed nibh non urna pulvinar interdum. Vestibulum eu purus id ex auctor pulvinar in sed mauris. Morbi auctor viverra sodales. Mauris vitae sapien nec sem convallis porta. Fusce sodales ligula sodales neque vehicula, non dapibus ipsum sodales. Integer luctus lacus non ullamcorper vestibulum.'
-      }
-      else if (oai >= 0.75) {
-        typology.textContent = 'VERY NORMAL';
-        resultDesc.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id lorem vel dui euismod elementum. Curabitur sed nibh non urna pulvinar interdum. Vestibulum eu purus id ex auctor pulvinar in sed mauris. Morbi auctor viverra sodales. Mauris vitae sapien nec sem convallis porta. Fusce sodales ligula sodales neque vehicula, non dapibus ipsum sodales. Integer luctus lacus non ullamcorper vestibulum.'
-      }
-      else if (oai >= 0.5) {
-        typology.textContent = 'MOSTLY NORMAL';
-        resultDesc.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id lorem vel dui euismod elementum. Curabitur sed nibh non urna pulvinar interdum. Vestibulum eu purus id ex auctor pulvinar in sed mauris. Morbi auctor viverra sodales. Mauris vitae sapien nec sem convallis porta. Fusce sodales ligula sodales neque vehicula, non dapibus ipsum sodales. Integer luctus lacus non ullamcorper vestibulum.'
-      }
-      else if (oai >= 0.25) {
-        typology.textContent = 'SOMEWHAT ABNORMAL';
-        resultDesc.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id lorem vel dui euismod elementum. Curabitur sed nibh non urna pulvinar interdum. Vestibulum eu purus id ex auctor pulvinar in sed mauris. Morbi auctor viverra sodales. Mauris vitae sapien nec sem convallis porta. Fusce sodales ligula sodales neque vehicula, non dapibus ipsum sodales. Integer luctus lacus non ullamcorper vestibulum.'
-      }
-      else if (oai >= 0.0) {
-        typology.textContent = 'VERY ABNORMAL';
-        resultDesc.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id lorem vel dui euismod elementum. Curabitur sed nibh non urna pulvinar interdum. Vestibulum eu purus id ex auctor pulvinar in sed mauris. Morbi auctor viverra sodales. Mauris vitae sapien nec sem convallis porta. Fusce sodales ligula sodales neque vehicula, non dapibus ipsum sodales. Integer luctus lacus non ullamcorper vestibulum.'
-      }
-    }
-    else {
-      const pctg = document.createElement('percentage');
-      percentage.textContent = '--%';
-      typology.textContent = 'UNOPINIONATED';
-      resultDesc.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id lorem vel dui euismod elementum. Curabitur sed nibh non urna pulvinar interdum. Vestibulum eu purus id ex auctor pulvinar in sed mauris. Morbi auctor viverra sodales. Mauris vitae sapien nec sem convallis porta. Fusce sodales ligula sodales neque vehicula, non dapibus ipsum sodales. Integer luctus lacus non ullamcorper vestibulum.'
+      const interpret = document.createElement('p');
+      if (oai >= 0.9) interpret.textContent = 'Very high alignment with the public consensus.';
+      else if (oai >= 0.75) interpret.textContent = 'High alignment with the public consensus.';
+      else if (oai >= 0.5) interpret.textContent = 'Moderate alignment with the public consensus.';
+      else if (oai >= 0.25) interpret.textContent = 'Low alignment with the public consensus.';
+      else if (oai = 0.0) interpret.textContent = 'Strongly opposed to the public consensus.';
+  leftCol.appendChild(interpret);
+    } else {
+      const p = document.createElement('p');
+      p.textContent = 'Overall Alignment Index (OAI): — (no answered questions)';
+      leftCol.appendChild(p);
     }
 
     // answered count
@@ -89,6 +68,7 @@
     const answeredP = document.createElement('p');
     answeredP.textContent = `Answered questions: ${nonSkipped} / ${payload.questions.length}`;
     container.appendChild(answeredP);
+
 
     // show how many times the user agreed or disagreed
     let agreeCount = 0;

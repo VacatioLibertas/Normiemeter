@@ -22,12 +22,49 @@
       </div>
 
     <div id="content" style="margin-left:10%; margin-right:10%;">
+      <span id="resultWrap">
+      <!-- start building outline for results page -->
+      <h3>You are <b id="typology"></b></h3>
+      <div id="resultDesc"></div>
+      <div id="throbber">
+        <div class="rectangle"></div>
+        <div class="rectangle"></div>
+        <div class="rectangle"></div>
+        <div class="rectangle"></div>
+        <div class="rectangle"></div>
+        <div class="rectangle"></div>
+        <div class="rectangle"></div>
+        <div class="rectangle"></div>
+        <div class="rectangle"></div>
+        <div class="rectangle"></div>
+        <div class="rectangle"></div>
+        <div class="rectangle"></div>
+        <div id="percentage"></div>
+        <div id="result">NORMIE</div>
+      </div>
+      </span>
       <div id="resultsContainer" style="text-align:center; margin-top:12px;"></div>
       <div style="text-align:center; margin-top:18px;">
         <button id="restartBtn" class="button2">RESTART QUIZ</button>
       </div>
     </div>
-
     <script src="./scripts/results.js"></script>
+        <script>
+      function positionThrobber() {
+        if (window.innerWidth <= 820) {
+          throbber.style.position = 'relative';
+          return;
+        }
+        const desc = document.getElementById('resultDesc');
+        const throbber = document.getElementById('throbber');
+        const descHeight = desc.offsetHeight;
+        const throbberHeight = throbber.offsetHeight;
+        const offset = (descHeight - throbberHeight) / 2;
+        throbber.style.top = desc.offsetTop + offset + 'px';
+        throbber.style.left = (desc.offsetLeft + desc.offsetWidth + 50) + 'px';
+      }
+    window.addEventListener('load', positionThrobber);
+    window.addEventListener('resize', positionThrobber);
+    </script>
   </body>
 </html>
