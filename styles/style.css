@@ -144,10 +144,11 @@ Fonts (from Substack):
     border-radius: 5px;
     width: 230px;
     margin-top: 15px;
-    margin-bottom: 20px;
     padding: 4px;
     border: none;
     font-size: 24px;
+    height: 65px;
+    vertical-align: middle;
   }
 
   /* the small one for big quiz */
@@ -156,15 +157,15 @@ Fonts (from Substack):
     text-align: center;
     display: inline-block;
     color: #ffffff;
-    border: 2px solid blue;
-    background-color: transparent;
+    background-color: #443e3c;
     border-radius: 5px;
-    width: max-content;
-    margin-bottom: 15px;
+    width: 230px;
     padding: 4px;
-    border: none;
-    font-size: 20px;
-    margin: 0 auto;
+    border: 2px solid #FCBA04;
+    font-size: 16px;
+    vertical-align: bottom;
+    height: 65px;
+    margin-top: 15px;
   }
 
   .button:hover {
@@ -173,9 +174,10 @@ Fonts (from Substack):
     cursor: pointer;
   }
   
-  .button3:hover {
+  .button2:hover {
     text-decoration: none;
-    background-color: #443e3c;
+    background-color: #292524;
+    border-color: #e3a703;
     cursor: pointer;
   }
 
