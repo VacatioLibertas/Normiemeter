@@ -275,6 +275,8 @@ Fonts (from Substack):
     background-color: #292524;
     height: 125px;
     margin-top: 0px;
+    opacity: 0;
+    animation: fadeIn 3s 2s forwards;
 } 
 
   #resultDesc {

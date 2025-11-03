@@ -133,11 +133,10 @@
 
       const interpret = document.createElement('p');
       if (oai >= 0.9) interpret.textContent = 'Very high alignment with the public consensus.';
-      else if (oai >= 0.7) interpret.textContent = 'High alignment with the public consensus.';
+      else if (oai >= 0.75) interpret.textContent = 'High alignment with the public consensus.';
       else if (oai >= 0.5) interpret.textContent = 'Moderate alignment with the public consensus.';
-      else if (oai >= 0.25) interpret.textContent = 'Mixed or near-neutral alignment.';
-      else if (oai = 0.0) interpret.textContent = 'Low alignment with the public consensus.';
-      else interpret.textContent = 'Strongly opposed to the public consensus.';
+      else if (oai >= 0.25) interpret.textContent = 'Low alignment with the public consensus.';
+      else if (oai = 0.0) interpret.textContent = 'Strongly opposed to the public consensus.';
   leftCol.appendChild(interpret);
     } else {
       const p = document.createElement('p');
