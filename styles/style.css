@@ -276,7 +276,7 @@ Fonts (from Substack):
     height: 125px;
     margin-top: 0px;
     opacity: 0;
-    animation: fadeIn 3s 2s forwards;
+    animation: fadeIn 2s 3s forwards;
 } 
 
   #resultDesc {
@@ -525,7 +525,10 @@ Fonts (from Substack):
 
     #quizControls {
       position: fixed;
+      bottom: 0;
       height: fit-content;
+      opacity: 0;
+      animation: fadeIn 2s 3s forwards;
     } 
 
     #question {
