@@ -40,7 +40,7 @@
     // compute OAI same as in quiz.js
     let totalMax = 0;
     for (const a of (payload.answers || [])) {
-      if (!a || a.answer === 'skip') continue;
+      if (!a || a.answer == 'skip') continue;
       const q = payload.questions[a.index];
       const netSupport = Number(q['Net Support']) || 0;
       const salience = Number(q['Salience']) || 0;
@@ -100,27 +100,24 @@
     let disagreeCount = 0;
     for (const a of (payload.answers || [])) {
       if (!a) continue;
-      if (a.answer === 'agree') agreeCount++;
-      if (a.answer === 'disagree') disagreeCount++;
+      if (a.answer == 'agree') agreeCount++;
+      if (a.answer == 'disagree') disagreeCount++;
     }
     const countsP = document.createElement('p');
     countsP.textContent = `Agreed: ${agreeCount} — Disagreed: ${disagreeCount}`;
     container.appendChild(countsP);
 
-    // wrapper to enable scrolling
     const wrapper = document.createElement('div');
     wrapper.style.maxHeight = '60vh';
     wrapper.style.overflow = 'auto';
     wrapper.style.marginLeft = "-10%";
     wrapper.style.marginRight = "-10%";
 
-    // create table
     const tbl = document.createElement('table');
     tbl.style.textAlign = 'left';
     tbl.style.width = '100%';
     tbl.style.borderCollapse = 'collapse';
 
-    // build thead with one header row
     const thead = document.createElement('thead');
     const headRow = document.createElement('tr');
 
@@ -140,9 +137,6 @@
     thead.appendChild(headRow);
     tbl.appendChild(thead);
 
-    
-
-    // build tbody and rows
     const tbody = document.createElement('tbody');
 
     for (let i = 0; i < (payload.questions || []).length; i++) {
@@ -155,7 +149,7 @@
       n.style.width = '10px';
 
       const q = payload.questions[i];
-      const ans = (payload.answers || []).find(a => a.index === i);
+      const ans = (payload.answers || []).find(a => a.index == i);
       const title = q['Policy'] || '';
       const answerText = ans ? ans.answer : 'unseen';
 
@@ -190,8 +184,6 @@
     wrapper.appendChild(tbl);
     container.appendChild(wrapper);
 
-
-    // wire restart button — redirect back to short quiz if payload.source === 'short'
     const restart = document.createElement('button');
     restart.style.fontFamily = 'Inconsolata';
     restart.textContent = 'RESTART QUIZ';
@@ -213,7 +205,7 @@
     if (restart) {
       restart.addEventListener('click', () => {
         localStorage.removeItem('normiemeter_results');
-        if (payload && payload.source === 'short') {
+        if (payload && payload.source == 'short') {
           window.location.href = './shortquiz.html';
         } else {
           window.location.href = './quiz.html';
@@ -250,7 +242,7 @@
     container.appendChild(home);
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', render);
+  if (document.readyState == 'loading') document.addEventListener('DOMContentLoaded', render);
   else render();
 
 })();
