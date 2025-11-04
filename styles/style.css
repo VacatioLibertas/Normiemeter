@@ -147,7 +147,6 @@ Fonts (from Substack):
     padding: 4px;
     border: none;
     font-size: 24px;
-
     vertical-align: middle;
   }
 
@@ -381,6 +380,12 @@ Fonts (from Substack):
 
   #resultWrap {
     margin-bottom: 10px;
+  }
+
+  table {
+    border: 2px solid #443e3c;
+    width: 100%;
+    padding: 0px;
   }
 
   @keyframes fadeIn {

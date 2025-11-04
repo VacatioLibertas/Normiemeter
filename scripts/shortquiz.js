@@ -158,30 +158,6 @@
 		window.location.href = './results.html';
 	}
 
-	// proposals and choices
-	function renderResultsBreakdown(container) {
-		const list = document.createElement('div');
-		list.style.textAlign = 'left';
-		list.style.marginTop = '12px';
-		const header = document.createElement('p');
-		header.style.fontWeight = 'bold';
-		header.textContent = 'Per-question breakdown:';
-		list.appendChild(header);
-		const ul = document.createElement('ul');
-		for (var i = 0; i < state.questions.length; i++) {
-			const q = state.questions[i];
-			const ans = state.answers.find(a => a.index == i);
-			const li = document.createElement('li');
-			const title = q['Policy'] || q['Policy Text'] || `Question ${i+1}`;
-			const answerText = ans ? ans.answer : 'unseen';
-			const contribText = ans ? (ans.contrib || 0).toFixed(3) : '0.000';
-			li.textContent = `${title} — ${answerText} (contrib: ${contribText})`;
-			ul.appendChild(li);
-		}
-		list.appendChild(ul);
-		container.appendChild(list);
-	}
-
 	// setting up the buttons + main question
 	function renderButtons() {
 		// do u agree tbh

@@ -51,11 +51,11 @@
       // make it from 0 - 100
       oai = ((payload.totalScore / totalMax)+1)/2;
       const pct = (oai * 100).toFixed(1);
-      const pctg = document.createElement('percentage');
+      const pctg = document.getElementById('percentage');
       percentage.textContent = `${Math.trunc(pct)}%`;
-
-      const type = document.createElement('typology');
-      const typeDesc = document.createElement('resultDesc')
+      const type = document.getElementById('typology');
+      const typeDesc = document.getElementById('resultDesc');
+      const rects = document.querySelectorAll('.rectangle');
       if (oai >= 0.9) {
         typology.textContent = 'EXTREMELY NORMAL';
         resultDesc.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id lorem vel dui euismod elementum. Curabitur sed nibh non urna pulvinar interdum. Vestibulum eu purus id ex auctor pulvinar in sed mauris. Morbi auctor viverra sodales. Mauris vitae sapien nec sem convallis porta. Fusce sodales ligula sodales neque vehicula, non dapibus ipsum sodales. Integer luctus lacus non ullamcorper vestibulum.'
@@ -82,7 +82,12 @@
       percentage.textContent = '--%';
       typology.textContent = 'UNOPINIONATED';
       resultDesc.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id lorem vel dui euismod elementum. Curabitur sed nibh non urna pulvinar interdum. Vestibulum eu purus id ex auctor pulvinar in sed mauris. Morbi auctor viverra sodales. Mauris vitae sapien nec sem convallis porta. Fusce sodales ligula sodales neque vehicula, non dapibus ipsum sodales. Integer luctus lacus non ullamcorper vestibulum.'
+      rects.forEach(r => {
+        r.style.backgroundColor = '#FFFFFF';
+      });
     }
+
+
 
     // answered count
     const nonSkipped = (payload.answers || []).filter(a => a && a.answer !== 'skip').length || 0;
@@ -102,29 +107,109 @@
     countsP.textContent = `Agreed: ${agreeCount} — Disagreed: ${disagreeCount}`;
     container.appendChild(countsP);
 
-    // breakdown list
-    const divider = document.createElement('hr');
-    container.appendChild(divider);
+    // wrapper to enable scrolling
+    const wrapper = document.createElement('div');
+    wrapper.style.maxHeight = '60vh';
+    wrapper.style.overflow = 'auto';
+    wrapper.style.marginLeft = "-10%";
+    wrapper.style.marginRight = "-10%";
 
-    const ul = document.createElement('ul');
-    ul.style.textAlign = 'left';
-    ul.style.maxHeight = '60vh';
-    ul.style.overflow = 'auto';
-    for (let i = 0; i < payload.questions.length; i++) {
+    // create table
+    const tbl = document.createElement('table');
+    tbl.style.textAlign = 'left';
+    tbl.style.width = '100%';
+    tbl.style.borderCollapse = 'collapse';
+
+    // build thead with one header row
+    const thead = document.createElement('thead');
+    const headRow = document.createElement('tr');
+
+    const qNum = document.createElement('th');
+    qNum.textContent = 'Q.';
+    headRow.appendChild(qNum);
+
+    const titlePolicy = document.createElement('th');
+    titlePolicy.textContent = 'POLICY';
+    headRow.appendChild(titlePolicy);
+
+    const urAns = document.createElement('th');
+    urAns.textContent = 'YOUR ANSWER';
+    urAns.style.textAlign = 'right';
+    headRow.appendChild(urAns);
+
+    thead.appendChild(headRow);
+    tbl.appendChild(thead);
+
+    
+
+    // build tbody and rows
+    const tbody = document.createElement('tbody');
+
+    for (let i = 0; i < (payload.questions || []).length; i++) {
+      const row = document.createElement('tr');
+      row.style.marginBottom = '10px';
+
+      const n = document.createElement('td');
+      n.textContent = (i + 1) + '.';
+      row.appendChild(n);
+      n.style.width = '10px';
+
       const q = payload.questions[i];
       const ans = (payload.answers || []).find(a => a.index === i);
-      const li = document.createElement('li');
-      const title = q['Policy'] || q['Policy Text'] || `Question ${i+1}`;
+      const title = q['Policy'] || '';
       const answerText = ans ? ans.answer : 'unseen';
-      const contribText = ans ? (Number(ans.contrib) || 0).toFixed(3) : '0.000';
-      li.textContent = `${title} — ${answerText} (contrib: ${contribText})`;
-      ul.appendChild(li);
+
+      const policy = document.createElement('td');
+      policy.textContent = `${title}`;
+      policy.style.width = '200px';
+      row.appendChild(policy);
+
+      const urans = document.createElement('td');
+      if (answerText == 'skip') {
+        urans.textContent = '●';
+        urans.style.color = '#756c69';
+      }
+      else if (answerText == 'agree') {
+        urans.textContent = '●';
+        urans.style.color = '#57bb8a';
+      }
+      else if (answerText == 'disagree') {
+        urans.textContent = '●';
+        urans.style.color = '#e67c73';
+      }
+      urans.style.textAlign = 'right';
+      urans.style.paddingRight = '10px';
+      urans.style.fontSize = '24px';
+      urans.style.verticalAlign = 'middle';
+      row.appendChild(urans);
+
+      tbody.appendChild(row);
     }
-    container.appendChild(ul);
+
+    tbl.appendChild(tbody);
+    wrapper.appendChild(tbl);
+    container.appendChild(wrapper);
+
 
     // wire restart button — redirect back to short quiz if payload.source === 'short'
-    const restart = $id('restartBtn');
+    const restart = document.createElement('button');
     restart.style.fontFamily = 'Inconsolata';
+    restart.textContent = 'RESTART QUIZ';
+    restart.style.width = '135px';
+    restart.style.fontSize = '20px';
+    restart.style.border = 'none';
+    restart.style.backgroundColor = '#FCBA04';
+    restart.style.color = '#FFFFFF';
+    restart.style.padding = '4px';
+    restart.style.borderRadius = '5px';
+    restart.style.fontWeight = 'bold';
+    restart.style.cursor = 'pointer';
+    restart.onmouseover = () => {
+		  restart.style.backgroundColor = '#e3a703';
+		};
+		restart.onmouseout = () => {
+			restart.style.backgroundColor = '#FCBA04';
+		};
     if (restart) {
       restart.addEventListener('click', () => {
         localStorage.removeItem('normiemeter_results');
@@ -136,31 +221,33 @@
       });
     }
 
-    // ensure both buttons have the same fixed width
-    if (restart) restart.style.width = '135px';
-
     // add a "Return to home" button next to the restart button
-    const homeBtn = document.createElement('button');
-  homeBtn.id = 'homeBtn';
-  homeBtn.textContent = 'RETURN HOME';
-  homeBtn.style.fontFamily = 'Inconsolata';
-  // give it the same class as the restart button so it matches visually
-  if (restart && restart.className) homeBtn.className = restart.className;
-  // small visual spacing if inserted next to restart
-  homeBtn.style.marginLeft = '8px';
-  // set same width as restart
-  homeBtn.style.width = '135px';
-    // Insert the button immediately after the restart button when possible
-    if (restart && restart.parentNode) {
-      restart.parentNode.insertBefore(homeBtn, restart.nextSibling);
-    } else {
-      // fallback: append to container
-      container.appendChild(homeBtn);
-    }
-    homeBtn.addEventListener('click', () => {
+    const home = document.createElement('button');
+    home.id = 'home';
+    home.textContent = 'RETURN HOME';
+    home.style.fontFamily = 'Inconsolata';
+    home.style.marginLeft = '8px';
+    home.style.width = '135px';
+    home.style.fontSize = '20px';
+    home.style.border = 'none';
+    home.style.backgroundColor = '#FCBA04';
+    home.style.color = '#FFFFFF';
+    home.style.padding = '4px';
+    home.style.borderRadius = '5px';
+    home.style.fontWeight = 'bold';
+    home.style.cursor = 'pointer';
+    home.onmouseover = () => {
+		  home.style.backgroundColor = '#e3a703';
+		};
+		home.onmouseout = () => {
+			home.style.backgroundColor = '#FCBA04';
+		};    
+    home.addEventListener('click', () => {
       // navigate to the site index (do not remove saved results by default)
       window.location.href = './index.html';
     });
+    container.appendChild(restart);
+    container.appendChild(home);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', render);
