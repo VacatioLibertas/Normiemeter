@@ -68,7 +68,6 @@
     answeredP.textContent = `Answered questions: ${nonSkipped} / ${payload.questions.length}`;
     resultDesc.appendChild(answeredP);
 
-
     var agreeCount = 0;
     var disagreeCount = 0;
     for (const a of (payload.answers)) {
@@ -146,18 +145,15 @@
 
       const supportValue = Number(q['Net Support']);
       const support = document.createElement('td');
-      support.style.display = 'flex';
-      support.style.alignItems = 'center';
-      support.style.justifyContent = 'center';
-      support.style.gap = '8px';
-      support.style.padding = '6px 8px';
+
 
       const barWrapper = document.createElement('div');
       barWrapper.style.position = 'relative';
       barWrapper.style.width = '300px';
       barWrapper.style.height = '14px';
       barWrapper.style.margin = '0 auto';
-      barWrapper.style.display = 'block';  
+      barWrapper.style.display = 'flex';
+      barWrapper.style.alignItems = 'center'; 
 
       const bar = document.createElement('div');
       bar.style.position = 'absolute';
@@ -176,14 +172,14 @@
 
       if (supportValue >= 0) {
         bar.style.left = '50%';
-        bar.style.marginLeft = '2px';
+        bar.style.marginLeft = '1px';
         supportLabel.style.textAlign = 'left';
         supportLabel.style.position = 'absolute';
         supportLabel.style.right = `calc(50% - 45px - ${w})`;
       }
       else {
         bar.style.right = '50%';
-        bar.style.marginRight = '2px';
+        bar.style.marginRight = '1px';
         supportLabel.style.textAlign = 'right';
         supportLabel.style.left = `calc(50% - 45px - ${w})`;
         supportLabel.style.position = 'absolute';
