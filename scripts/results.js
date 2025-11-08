@@ -64,8 +64,9 @@
 
     const nonSkipped = (payload.answers).filter(a => a && a.answer !== 'skip').length || 0;
     const answeredP = document.createElement('p');
+    answeredP.style.marginBottom = '-14px';
     answeredP.textContent = `Answered questions: ${nonSkipped} / ${payload.questions.length}`;
-    container.appendChild(answeredP);
+    resultDesc.appendChild(answeredP);
 
 
     var agreeCount = 0;
@@ -77,7 +78,8 @@
     }
     const countsP = document.createElement('p');
     countsP.textContent = `Agreed: ${agreeCount} — Disagreed: ${disagreeCount}`;
-    container.appendChild(countsP);
+    countsP.style.marginBottom = '0px';
+    resultDesc.appendChild(countsP);
 
     const wrapper = document.createElement('div');
     wrapper.style.maxHeight = '60vh';
