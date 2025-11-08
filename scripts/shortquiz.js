@@ -29,11 +29,9 @@
 
 	// calc how much question contributes to the score
 	function computeContribution(q, answer) {
-		// net support determined from the original PAC survey
 		const netSupport = Number(q['Net Support']);
 		// arbitrary weights rn
 		const salience = Number(q['Salience']);
-		// calculate
 		const agreeScore = salience * netSupport;
 		if (answer == 'agree') return agreeScore;
 		if (answer == 'disagree') return -agreeScore;

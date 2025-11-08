@@ -473,17 +473,17 @@ Fonts (from Substack):
 
     .rectangle {
     left: 50%;
-    top: 14%;
+    top: 15%;
     }
 
     #throbber::after {
       left: 50%;
-      top: 14%;
+      top: 15%;
     }
 
     #percentage, #result {
       left: 50%;
-      top: 14%;
+      top: 15%;
       transform: translate(-50%, -50%);
     }
 
