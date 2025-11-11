@@ -69,33 +69,33 @@
 		p.textContent = policyText;
 		proposal.appendChild(p);
 
-		// left arguments
+		// supporter arguments
 		left.innerHTML = '';
-		const dHeader = document.createElement('p');
-		dHeader.className = 'dem';
-		dHeader.textContent = 'DEMOCRATS SAY...';
-		left.appendChild(dHeader);
-		const demArgs = [];
-		if (q['Democratic Argument 1'] && q['Democratic Argument 1']) demArgs.push(q['Democratic Argument 1']);
-		if (q['Democratic Argument 2'] && q['Democratic Argument 2']) demArgs.push(q['Democratic Argument 2']);
-		const chosenDem = demArgs.length ? demArgs[Math.floor(Math.random() * demArgs.length)] : '';
-		const dP = document.createElement('p');
-		dP.textContent = chosenDem;
-		left.appendChild(dP);
+		const sHeader = document.createElement('p');
+		sHeader.className = 'sup';
+		sHeader.textContent = 'SUPPORTERS SAY...';
+		left.appendChild(sHeader);
+		const supArgs = [];
+		if (q['Supporter Argument 1'] && q['Supporter Argument 1']) supArgs.push(q['Supporter Argument 1']);
+		if (q['Supporter Argument 2'] && q['Supporter Argument 2']) supArgs.push(q['Supporter Argument 2']);
+		const chosenSup = supArgs.length ? supArgs[Math.floor(Math.random() * supArgs.length)] : '';
+		const sP = document.createElement('p');
+		sP.textContent = chosenSup;
+		left.appendChild(sP);
 
-		// right arguments
+		// opponent argyments
 		right.innerHTML = '';
-		const rHeader = document.createElement('p');
-		rHeader.className = 'rep';
-		rHeader.textContent = 'REPUBLICANS SAY...';
-		right.appendChild(rHeader);
-		const repArgs = [];
-		if (q['Republican Argument 1'] && q['Republican Argument 1']) repArgs.push(q['Republican Argument 1']);
-		if (q['Republican Argument 2'] && q['Republican Argument 2']) repArgs.push(q['Republican Argument 2']);
-		const chosenRep = repArgs.length ? repArgs[Math.floor(Math.random() * repArgs.length)] : '';
-		const rP = document.createElement('p');
-		rP.textContent = chosenRep;
-		right.appendChild(rP);
+		const oHeader = document.createElement('p');
+		oHeader.className = 'opp';
+		oHeader.textContent = 'OPPONENTS SAY...';
+		right.appendChild(oHeader);
+		const oppArgs = [];
+		if (q['Opponent Argument 1'] && q['Opponent Argument 1']) oppArgs.push(q['Opponent Argument 1']);
+		if (q['Opponent Argument 2'] && q['Opponent Argument 2']) oppArgs.push(q['Opponent Argument 2']);
+		const chosenOpp = oppArgs.length ? oppArgs[Math.floor(Math.random() * oppArgs.length)] : '';
+		const oP = document.createElement('p');
+		oP.textContent = chosenOpp;
+		right.appendChild(oP);
 
 		// show user their progress
 		const progress = document.getElementById('progress');
@@ -141,17 +141,16 @@
 			questions: state.questions.map(q => ({
 				Policy: q['Policy'] || q['Policy Text'] || '',
 				"Policy Text": q['Policy Text'] || '',
-				"Democratic Argument 1": q['Democratic Argument 1'] || '',
-				"Democratic Argument 2": q['Democratic Argument 2'] || '',
-				"Republican Argument 1": q['Republican Argument 1'] || '',
-				"Republican Argument 2": q['Republican Argument 2'] || '',
+				"Supporter Argument 1": q['Supporter Argument 1'] || '',
+				"Supporter Argument 2": q['Supporter Argument 2'] || '',
+				"Opponent Argument 1": q['Opponent Argument 1'] || '',
+				"Opponent Argument 2": q['Opponent Argument 2'] || '',
 				"Net Support": Number(q['Net Support']),
 				Salience: Number(q['Salience'])
 			})),
 			answers: state.answers,
 			totalScore: state.totalScore
 		};
-		payload.source = 'short';
 		localStorage.setItem('normiemeter_results', JSON.stringify(payload));
 		// go to results page
 		window.location.href = './results.html';

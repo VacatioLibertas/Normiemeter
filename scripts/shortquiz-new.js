@@ -151,7 +151,6 @@
 			answers: state.answers,
 			totalScore: state.totalScore
 		};
-		payload.source = 'short';
 		localStorage.setItem('normiemeter_results', JSON.stringify(payload));
 		// go to results page
 		window.location.href = './results.html';

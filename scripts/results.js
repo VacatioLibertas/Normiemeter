@@ -143,7 +143,7 @@
       policy.style.width = '200px';
       row.appendChild(policy);
 
-      const supportValue = Number(q['Net Support']);
+      const supportValue = Math.trunc(Number(q['Net Support']));
       const support = document.createElement('td');
 
 
@@ -179,7 +179,7 @@
       }
       else {
         bar.style.right = '50%';
-        bar.style.marginRight = '1px';
+        bar.style.marginRight = '0px';
         supportLabel.style.textAlign = 'right';
         supportLabel.style.left = `calc(50% - 45px - ${w})`;
         supportLabel.style.position = 'absolute';
@@ -274,7 +274,7 @@
       });
     }
 
-    const restart = document.createElement('button');
+    /* const restart = document.createElement('button');
     restart.style.fontFamily = 'Inconsolata';
     restart.textContent = 'RESTART QUIZ';
     restart.style.width = '135px';
@@ -295,13 +295,14 @@
     if (restart) {
       restart.addEventListener('click', () => {
         localStorage.removeItem('normiemeter_results');
-        if (payload && payload.source == 'short') {
+        if (payload && payload.source === 'short') {
           window.location.href = './shortquiz.html';
         } else {
           window.location.href = './quiz.html';
         }
       });
     }
+      */
 
     const home = document.createElement('button');
     home.id = 'home';
@@ -326,7 +327,7 @@
     home.addEventListener('click', () => {
       window.location.href = './index.html';
     });
-    container.appendChild(restart);
+    // container.appendChild(restart);
     container.appendChild(home);
   }
 

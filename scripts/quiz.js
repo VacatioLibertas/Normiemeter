@@ -98,6 +98,10 @@
 		right.appendChild(r1);	
 		right.appendChild(r2);
 
+		// supporter arguments
+
+		// opponent argyments
+
 		// show user their progress
 		const progress = document.getElementById('progress');
 		if (progress) progress.textContent = `Question ${index + 1} / ${total}`;
