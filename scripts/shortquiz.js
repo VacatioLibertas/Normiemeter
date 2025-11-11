@@ -69,33 +69,65 @@
 		p.textContent = policyText;
 		proposal.appendChild(p);
 
-		// left arguments
-		left.innerHTML = '';
-		const dHeader = document.createElement('p');
-		dHeader.className = 'dem';
-		dHeader.textContent = 'DEMOCRATS SAY...';
-		left.appendChild(dHeader);
-		const demArgs = [];
-		if (q['Democratic Argument 1'] && q['Democratic Argument 1']) demArgs.push(q['Democratic Argument 1']);
-		if (q['Democratic Argument 2'] && q['Democratic Argument 2']) demArgs.push(q['Democratic Argument 2']);
-		const chosenDem = demArgs.length ? demArgs[Math.floor(Math.random() * demArgs.length)] : '';
-		const dP = document.createElement('p');
-		dP.textContent = chosenDem;
-		left.appendChild(dP);
+		if(q['Bipartisan']) {
+			// supporter arguments
+			left.innerHTML = '';
+			const sHeader = document.createElement('p');
+			sHeader.className = 'sup';
+			sHeader.textContent = 'SUPPORTERS SAY...';
+			left.appendChild(sHeader);
+			const supArgs = [];
+			if (q['Supporter Argument 1'] && q['Supporter Argument 1']) supArgs.push(q['Supporter Argument 1']);
+			if (q['Supporter Argument 2'] && q['Supporter Argument 2']) supArgs.push(q['Supporter Argument 2']);
+			const chosenSup = supArgs.length ? supArgs[Math.floor(Math.random() * supArgs.length)] : '';
+			const sP = document.createElement('p');
+			sP.textContent = chosenSup;
+			left.appendChild(sP);
 
-		// right arguments
-		right.innerHTML = '';
-		const rHeader = document.createElement('p');
-		rHeader.className = 'rep';
-		rHeader.textContent = 'REPUBLICANS SAY...';
-		right.appendChild(rHeader);
-		const repArgs = [];
-		if (q['Republican Argument 1'] && q['Republican Argument 1']) repArgs.push(q['Republican Argument 1']);
-		if (q['Republican Argument 2'] && q['Republican Argument 2']) repArgs.push(q['Republican Argument 2']);
-		const chosenRep = repArgs.length ? repArgs[Math.floor(Math.random() * repArgs.length)] : '';
-		const rP = document.createElement('p');
-		rP.textContent = chosenRep;
-		right.appendChild(rP);
+			// opponent argyments
+			right.innerHTML = '';
+			const oHeader = document.createElement('p');
+			oHeader.className = 'opp';
+			oHeader.textContent = 'OPPONENTS SAY...';
+			right.appendChild(oHeader);
+			const oppArgs = [];
+			if (q['Opponent Argument 1'] && q['Opponent Argument 1']) oppArgs.push(q['Opponent Argument 1']);
+			if (q['Opponent Argument 2'] && q['Opponent Argument 2']) oppArgs.push(q['Opponent Argument 2']);
+			const chosenOpp = oppArgs.length ? oppArgs[Math.floor(Math.random() * oppArgs.length)] : '';
+			const oP = document.createElement('p');
+			oP.textContent = chosenOpp;
+			right.appendChild(oP);
+		}
+
+		else {
+			// left arguments
+			left.innerHTML = '';
+			const dHeader = document.createElement('p');
+			dHeader.className = 'dem';
+			dHeader.textContent = 'DEMOCRATS SAY...';
+			left.appendChild(dHeader);
+			const demArgs = [];
+			if (q['Democratic Argument 1'] && q['Democratic Argument 1']) demArgs.push(q['Democratic Argument 1']);
+			if (q['Democratic Argument 2'] && q['Democratic Argument 2']) demArgs.push(q['Democratic Argument 2']);
+			const chosenDem = demArgs.length ? demArgs[Math.floor(Math.random() * demArgs.length)] : '';
+			const dP = document.createElement('p');
+			dP.textContent = chosenDem;
+			left.appendChild(dP);
+
+			// right arguments
+			right.innerHTML = '';
+			const rHeader = document.createElement('p');
+			rHeader.className = 'rep';
+			rHeader.textContent = 'REPUBLICANS SAY...';
+			right.appendChild(rHeader);
+			const repArgs = [];
+			if (q['Republican Argument 1'] && q['Republican Argument 1']) repArgs.push(q['Republican Argument 1']);
+			if (q['Republican Argument 2'] && q['Republican Argument 2']) repArgs.push(q['Republican Argument 2']);
+			const chosenRep = repArgs.length ? repArgs[Math.floor(Math.random() * repArgs.length)] : '';
+			const rP = document.createElement('p');
+			rP.textContent = chosenRep;
+			right.appendChild(rP);
+		}
 
 		// show user their progress
 		const progress = document.getElementById('progress');

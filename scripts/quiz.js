@@ -71,41 +71,66 @@
 		p.textContent = policyText;
 		proposal.appendChild(p);
 
-		// left arguments
-		left.innerHTML = '';
-		right.innerHTML = '';
-		const dHeader = document.createElement('p');
-		dHeader.className = 'dem';
-		dHeader.textContent = 'DEMOCRATS SAY...';
-		const d1 = document.createElement('p');
-		const d2 = document.createElement('p');
-		d1.textContent = q['Democratic Argument 1'] || '';
-		d2.textContent = q['Democratic Argument 2'];
-		left.appendChild(dHeader);
-		left.appendChild(d1);
-		left.appendChild(d2);
 
+		if(q['Bipartisan']) {
+			// supporter arguments
+			left.innerHTML = '';
+			const sHeader = document.createElement('p');
+			sHeader.className = 'sup';
+			sHeader.textContent = 'SUPPORTERS SAY...';
+			const s1 = document.createElement('p');
+			const s2 = document.createElement('p');
+			s1.textContent = q['Supporter Argument 1'];
+			s2.textContent = q['Supporter Argument 2'];
+			left.appendChild(sHeader);
+			left.appendChild(s1);
+			left.appendChild(s2);
 
-		// right arguments
-		const rHeader = document.createElement('p');
-		rHeader.className = 'rep';
-		rHeader.textContent = 'REPUBLICANS SAY...';
-		const r1 = document.createElement('p');
-		const r2 = document.createElement('p');
-		r1.textContent = q['Republican Argument 1'] || '';
-		r2.textContent = q['Republican Argument 2'];
-		right.appendChild(rHeader);
-		right.appendChild(r1);	
-		right.appendChild(r2);
+			// opponent argyments
+			right.innerHTML = '';
+			const oHeader = document.createElement('p');
+			oHeader.className = 'opp';
+			oHeader.textContent = 'OPPONENTS SAY...';
+			const o1 = document.createElement('p');
+			const o2 = document.createElement('p');
+			o1.textContent = q['Opponent Argument 1'];
+			o2.textContent = q['Opponent Argument 2'];
+			right.appendChild(oHeader);
+			right.appendChild(o1);
+			right.appendChild(o2);
+		}
+		
+		else {
+			// left arguments
+			left.innerHTML = '';
+			right.innerHTML = '';
+			const dHeader = document.createElement('p');
+			dHeader.className = 'dem';
+			dHeader.textContent = 'DEMOCRATS SAY...';
+			const d1 = document.createElement('p');
+			const d2 = document.createElement('p');
+			d1.textContent = q['Democratic Argument 1'] || '';
+			d2.textContent = q['Democratic Argument 2'];
+			left.appendChild(dHeader);
+			left.appendChild(d1);
+			left.appendChild(d2);
 
-		// supporter arguments
-
-		// opponent argyments
+			// right arguments
+			const rHeader = document.createElement('p');
+			rHeader.className = 'rep';
+			rHeader.textContent = 'REPUBLICANS SAY...';
+			const r1 = document.createElement('p');
+			const r2 = document.createElement('p');
+			r1.textContent = q['Republican Argument 1'];
+			r2.textContent = q['Republican Argument 2'];
+			right.appendChild(rHeader);
+			right.appendChild(r1);	
+			right.appendChild(r2);
+		}
 
 		// show user their progress
 		const progress = document.getElementById('progress');
 		if (progress) progress.textContent = `Question ${index + 1} / ${total}`;
-		
 	}		
 
 	const state = {
