@@ -270,7 +270,8 @@ Fonts (from Substack):
 
   .sup {
     display: flex;
-    background-color: #57bb8a;
+    flex-direction: column; 
+    background-color: #39A071;
     font-size: 20px;
     font-weight: bold;
     text-align: left;
@@ -283,13 +284,14 @@ Fonts (from Substack):
 
   .opp {
     display: flex;
-    background-color: #E24A38;
+    flex-direction: column; 
+    background-color: #e4524d;
     font-size: 20px;
     font-weight: bold;
-    text-align: left;
+    text-align: right;
     margin: 3px;
     width: fit-content;
-    margin-right: auto;
+    margin-left: auto;
     margin-bottom: 0px;
     padding: 2px;
   }
