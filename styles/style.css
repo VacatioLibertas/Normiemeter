@@ -66,15 +66,11 @@ Fonts (from Substack):
   }
 
   /* stand-in for social media share button */
-  #toy {
+  #share {
     position: absolute;
     top: 15px;
     right: 25px;
     margin-left: 10px;
-  }
-
-  #toy:active {
-    transform: scaley(.8);
   }
 
   a {
@@ -414,7 +410,6 @@ Fonts (from Substack):
   }
 
   table {
-    border: 2px solid #443e3c;
     width: 100%;
     padding: 0px;
   }
@@ -554,7 +549,7 @@ Fonts (from Substack):
       margin: 0 auto;
     }
 
-    #logo, #toy {
+    #logo, #share {
       margin: 0 auto;
       width: 32px;
       height: 32px;
@@ -565,7 +560,7 @@ Fonts (from Substack):
       left: 17px;
     }
 
-    #toy {
+    #share {
       right: 17px;
     }
 
@@ -589,7 +584,6 @@ Fonts (from Substack):
       margin-bottom: 110px;
       overflow-y: scroll;
     }   
-
   }
 
   @font-face {

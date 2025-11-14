@@ -14,9 +14,8 @@
             <a href="https://onlytothinking.com">
             <img src="favico.png" alt="The logo for 'Only To Thinking'"></a>
         </div>
-        <div id="toy" onclick="document.getElementById('squeak').play();">
-            <audio id="squeak" src="./images/squeak.mp3" preload="auto"></audio>
-            <img alt="a picture of a rubber ducky" src="./images/ducky.png">
+        <div id="share" onclick="shareButton()">
+            <img alt="Share button" src="./images/share.png">
         </div>
         <h1><a href="https://onlytothinking.com">Only To Thinking</a></h1>
         </div>
@@ -34,4 +33,10 @@
     </body>
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
     <script src="./scripts/quiz.js"></script>
+    <script>
+      function shareButton() {
+        navigator.clipboard.writeText("https://normiemeter.onlytothinking.com");
+        alert("Copied link!");
+      }
+    </script>    
 </html>

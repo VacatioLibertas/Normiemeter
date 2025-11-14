@@ -57,8 +57,8 @@
 		if (!proposal || !left || !right) return;
 
 		// policy title and description
-		const title = q['Policy'] || q['Policy Text'] || 'Untitled';
-		const policyText = q['Policy Text'] || q['Policy'] || '';
+		const title = q['Policy'] || q['Neutral Policy Text'] || 'Untitled';
+		const policyText = q['Neutral Policy Text'] || q['Policy'] || '';
 		proposal.innerHTML = '';
 		const h = document.createElement('h2');
 		h.style.marginBottom = '-3px';
@@ -139,8 +139,8 @@
 		// save results
 		const payload = {
 			questions: state.questions.map(q => ({
-				Policy: q['Policy'] || q['Policy Text'] || '',
-				"Policy Text": q['Policy Text'] || '',
+				Policy: q['Policy'] || q['Neutral Policy Text'] || '',
+				"Neutral Policy Text": q['Neutral Policy Text'] || '',
 				"Supporter Argument 1": q['Supporter Argument 1'] || '',
 				"Supporter Argument 2": q['Supporter Argument 2'] || '',
 				"Opponent Argument 1": q['Opponent Argument 1'] || '',

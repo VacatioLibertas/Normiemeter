@@ -58,7 +58,7 @@
       typology.textContent = 'UNOPINIONATED';
       resultDesc.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id lorem vel dui euismod elementum. Curabitur sed nibh non urna pulvinar interdum. Vestibulum eu purus id ex auctor pulvinar in sed mauris. Morbi auctor viverra sodales. Mauris vitae sapien nec sem convallis porta. Fusce sodales ligula sodales neque vehicula, non dapibus ipsum sodales. Integer luctus lacus non ullamcorper vestibulum.'
       rects.forEach(r => {
-        r.style.backgroundColor = '#FFFFFF';
+        r.style.backgroundColor = '#ffffff';
       });
     }
 
@@ -85,6 +85,7 @@
     wrapper.style.overflow = 'auto';
     wrapper.style.marginLeft = "-10%";
     wrapper.style.marginRight = "-10%";
+    wrapper.style.border = "2px solid #443e3c";
 
     const tbl = document.createElement('table');
     tbl.style.textAlign = 'left';
@@ -258,7 +259,7 @@
       const axisLine = document.createElement('div');
       axisLine.style.position = 'absolute';
       axisLine.style.width = '2px';
-      axisLine.style.background = '#fff';
+      axisLine.style.background = '#ffffff';
       axisLine.style.zIndex = '1';
       wrapper.appendChild(axisLine);
       requestAnimationFrame(() => {
@@ -306,11 +307,12 @@
 
     const home = document.createElement('button');
     home.id = 'home';
-    home.textContent = 'RETURN HOME';
+    home.textContent = 'TAKE ANOTHER QUIZ?';
     home.style.fontFamily = 'Inconsolata';
     home.style.marginLeft = '8px';
-    home.style.width = '135px';
+    home.style.width = '220px';
     home.style.fontSize = '20px';
+    home.style.marginTop = '10px';
     home.style.border = 'none';
     home.style.backgroundColor = '#FCBA04';
     home.style.color = '#FFFFFF';
@@ -325,7 +327,7 @@
 			home.style.backgroundColor = '#FCBA04';
 		};    
     home.addEventListener('click', () => {
-      window.location.href = './index.html';
+      window.location.href = './instructions.html';
     });
     // container.appendChild(restart);
     container.appendChild(home);

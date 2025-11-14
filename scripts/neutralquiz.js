@@ -29,9 +29,11 @@
 
 	// calc how much question contributes to the score
 	function computeContribution(q, answer) {
+		// net support determined from the original survey
 		const netSupport = Number(q['Net Support']);
 		// arbitrary weights rn
 		const salience = Number(q['Salience']);
+		// calculate
 		const agreeScore = salience * netSupport;
 		if (answer == 'agree') return agreeScore;
 		if (answer == 'disagree') return -agreeScore;
@@ -57,8 +59,8 @@
 		if (!proposal || !left || !right) return;
 
 		// policy title and description
-		const title = q['Policy'] || q['Policy Text'] || 'Untitled';
-		const policyText = q['Policy Text'] || q['Policy'] || '';
+		const title = q['Policy'] || q['Neutral Policy Text'] || 'Untitled';
+		const policyText = q['Neutral Policy Text'] || q['Policy'] || '';
 		proposal.innerHTML = '';
 		const h = document.createElement('h2');
 		h.style.marginBottom = '-3px';
@@ -69,38 +71,35 @@
 		p.textContent = policyText;
 		proposal.appendChild(p);
 
-		// left arguments
-		left.innerHTML = '';
-		const dHeader = document.createElement('p');
-		dHeader.className = 'dem';
-		dHeader.textContent = 'DEMOCRATS SAY...';
-		left.appendChild(dHeader);
-		const demArgs = [];
-		if (q['Democratic Argument 1'] && q['Democratic Argument 1']) demArgs.push(q['Democratic Argument 1']);
-		if (q['Democratic Argument 2'] && q['Democratic Argument 2']) demArgs.push(q['Democratic Argument 2']);
-		const chosenDem = demArgs.length ? demArgs[Math.floor(Math.random() * demArgs.length)] : '';
-		const dP = document.createElement('p');
-		dP.textContent = chosenDem;
-		left.appendChild(dP);
+    // supporter arguments
+    left.innerHTML = '';
+    const sHeader = document.createElement('p');
+    sHeader.className = 'sup';
+    sHeader.textContent = 'SUPPORTERS SAY...';
+    const s1 = document.createElement('p');
+    const s2 = document.createElement('p');
+    s1.textContent = q['Supporter Argument 1'];
+    s2.textContent = q['Supporter Argument 2'];
+    left.appendChild(sHeader);
+    left.appendChild(s1);
+    left.appendChild(s2);
 
-		// right arguments
-		right.innerHTML = '';
-		const rHeader = document.createElement('p');
-		rHeader.className = 'rep';
-		rHeader.textContent = 'REPUBLICANS SAY...';
-		right.appendChild(rHeader);
-		const repArgs = [];
-		if (q['Republican Argument 1'] && q['Republican Argument 1']) repArgs.push(q['Republican Argument 1']);
-		if (q['Republican Argument 2'] && q['Republican Argument 2']) repArgs.push(q['Republican Argument 2']);
-		const chosenRep = repArgs.length ? repArgs[Math.floor(Math.random() * repArgs.length)] : '';
-		const rP = document.createElement('p');
-		rP.textContent = chosenRep;
-		right.appendChild(rP);
-
+    // opponent argyments
+    right.innerHTML = '';
+    const oHeader = document.createElement('p');
+    oHeader.className = 'opp';
+    oHeader.textContent = 'OPPONENTS SAY...';
+    const o1 = document.createElement('p');
+    const o2 = document.createElement('p');
+    o1.textContent = q['Opponent Argument 1'];
+    o2.textContent = q['Opponent Argument 2'];
+    right.appendChild(oHeader);
+    right.appendChild(o1);
+    right.appendChild(o2);
+		
 		// show user their progress
 		const progress = document.getElementById('progress');
 		if (progress) progress.textContent = `Question ${index + 1} / ${total}`;
-		
 	}		
 
 	const state = {
@@ -139,8 +138,8 @@
 		// save results
 		const payload = {
 			questions: state.questions.map(q => ({
-				Policy: q['Policy'] || q['Policy Text'] || '',
-				"Policy Text": q['Policy Text'] || '',
+				Policy: q['Policy'] || q['Neutral Policy Text'] || '',
+				"Neutral Policy Text": q['Neutral Policy Text'] || '',
 				"Democratic Argument 1": q['Democratic Argument 1'] || '',
 				"Democratic Argument 2": q['Democratic Argument 2'] || '',
 				"Republican Argument 1": q['Republican Argument 1'] || '',
@@ -154,6 +153,30 @@
 		localStorage.setItem('normiemeter_results', JSON.stringify(payload));
 		// go to results page
 		window.location.href = './results.html';
+	}
+
+	// proposals and choices
+	function renderResultsBreakdown(container) {
+		const list = document.createElement('div');
+		list.style.textAlign = 'left';
+		list.style.marginTop = '12px';
+		const header = document.createElement('p');
+		header.style.fontWeight = 'bold';
+		header.textContent = 'Per-question breakdown:';
+		list.appendChild(header);
+		const ul = document.createElement('ul');
+		for (var i = 0; i < state.questions.length; i++) {
+			const q = state.questions[i];
+			const ans = state.answers.find(a => a.index == i);
+			const li = document.createElement('li');
+			const title = q['Policy'] || q['Neutral Policy Text'] || `Question ${i+1}`;
+			const answerText = ans ? ans.answer : 'unseen';
+			const contribText = ans ? (ans.contrib || 0).toFixed(3) : '0.000';
+			li.textContent = `${title} — ${answerText} (contrib: ${contribText})`;
+			ul.appendChild(li);
+		}
+		list.appendChild(ul);
+		container.appendChild(list);
 	}
 
 	// setting up the buttons + main question
@@ -195,7 +218,7 @@
 		disagree.style.fontWeight = 'bold'
 		disagree.style.marginRight = '0px';
 		disagree.style.marginBottom = '0px'
-		disagree.style.marginTop = '0px';
+		disagree.style.marginTop = '5px';
 		disagree.onclick = () => {
 			const q = state.questions[state.index];
 			const contrib = computeContribution(q, 'disagree');
@@ -303,9 +326,8 @@
 		// remove spacer on small screens
 		if (window.innerWidth < 601) {
 			spacer.style.width = '15px';
-			agree.style.width = '40%'
-			disagree.style.width = '40%'
-			disagree.style.marginTop = "2px";
+			agree.style.width = '155px'
+			disagree.style.width = '155px'
 		}
 
 		const spacer2 = document.createElement('span');
@@ -314,7 +336,7 @@
 
 		// all the buttons!!!!!!!!
 		controls.id = 'quizControls';
-		controls.style.marginTop = '10px';
+		controls.style.paddingTop = '10px';
 		controls.appendChild(yesNo);
 		controls.appendChild(agree);
 			controls.appendChild(spacer);
@@ -335,8 +357,6 @@
 			const objs = rowsToObjects(rows);
 			state.questions = objs.filter(o => o['Policy'] && o['Policy'].length > 0);
 			shuffleArray(state.questions);
-			// only 40 questions 
-			state.questions = state.questions.slice(0, 40);
 			state.index = 0;
 			state.totalScore = 0;
 			state.answers = [];
