@@ -565,9 +565,10 @@ Fonts (from Substack):
     }
 
     #intro {
-    margin-left: 0px;
-    margin-right: 0px;
-    text-align: justify;
+      margin-left: 0px;
+      margin-right: 0px;
+      text-align: justify;
+      margin-bottom: 3px;
     }
 
     #quizControls {
