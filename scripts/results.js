@@ -44,11 +44,11 @@
         resultDesc.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id lorem vel dui euismod elementum. Curabitur sed nibh non urna pulvinar interdum. Vestibulum eu purus id ex auctor pulvinar in sed mauris. Morbi auctor viverra sodales. Mauris vitae sapien nec sem convallis porta. Fusce sodales ligula sodales neque vehicula, non dapibus ipsum sodales. Integer luctus lacus non ullamcorper vestibulum.'
       }
       else if (oai >= 0.25) {
-        typology.textContent = 'SOMEWHAT ABNORMAL';
+        typology.textContent = 'SOMEWHAT DEVIANT';
         resultDesc.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id lorem vel dui euismod elementum. Curabitur sed nibh non urna pulvinar interdum. Vestibulum eu purus id ex auctor pulvinar in sed mauris. Morbi auctor viverra sodales. Mauris vitae sapien nec sem convallis porta. Fusce sodales ligula sodales neque vehicula, non dapibus ipsum sodales. Integer luctus lacus non ullamcorper vestibulum.'
       }
       else if (oai >= 0.0) {
-        typology.textContent = 'VERY ABNORMAL';
+        typology.textContent = 'VERY DEVIANT';
         resultDesc.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id lorem vel dui euismod elementum. Curabitur sed nibh non urna pulvinar interdum. Vestibulum eu purus id ex auctor pulvinar in sed mauris. Morbi auctor viverra sodales. Mauris vitae sapien nec sem convallis porta. Fusce sodales ligula sodales neque vehicula, non dapibus ipsum sodales. Integer luctus lacus non ullamcorper vestibulum.'
       }
     }
