@@ -108,6 +108,7 @@ Fonts (from Substack):
   /* name for the result */
   h3 b {
     animation: fadeIn 2s;
+    font-weight: bolder;
   }
 
   /* normiemeter logo */
@@ -315,7 +316,7 @@ Fonts (from Substack):
     animation: fadeIn 2s 3s forwards;
 } 
 
-  #resultDesc {
+  #resultDescBox {
     display: flex;
     flex-direction: column;
     float: left;
@@ -508,12 +509,19 @@ Fonts (from Substack):
       animation: fadeIn 4s 1s forwards;
     }
 
-    #resultDesc {
+    #resultDescBox {
       order: 0;
       float: none;
       width: 100%;
       margin: 0 auto 12px auto;
       animation: fadeIn 4s 1.5s forwards;
+    }
+
+    #resultsContainer {
+      clear: both;
+      padding-top: 4px;
+      width: 100%;
+      margin: 0 auto;
     }
 
     h3 {

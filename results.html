@@ -24,7 +24,10 @@
       <span id="resultWrap">
       <!-- start building outline for results page -->
       <h3>You are <b id="typology"></b></h3>
-      <div id="resultDesc"></div>
+      <div id="resultDescBox">
+        <div id="resultDesc"></div>
+        <div id="resultQuote" style="margin-top: 14px; font-weight: bold;"></div>
+      </div>
       <div id="throbber">
         <div class="rectangle"></div>
         <div class="rectangle"></div>
@@ -52,7 +55,7 @@
           throbber.style.position = 'relative';
           return;
         }
-        const desc = document.getElementById('resultDesc');
+        const desc = document.getElementById('resultDescBox');
         const throbber = document.getElementById('throbber');
         const descHeight = desc.offsetHeight;
         const throbberHeight = throbber.offsetHeight;

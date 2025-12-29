@@ -27,36 +27,42 @@
     const pctg = document.getElementById('percentage');
     const type = document.getElementById('typology');
     const typeDesc = document.getElementById('resultDesc');
+    const typeQuote = document.getElementById('resultQuote');
     const rects = document.querySelectorAll('.rectangle');
     if (totalMax > 0) {
       percentage.textContent = `${Math.trunc(pct)}%`;
 
-      if (oai >= 0.9) {
-        typology.textContent = 'EXTREMELY NORMAL';
-        resultDesc.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id lorem vel dui euismod elementum. Curabitur sed nibh non urna pulvinar interdum. Vestibulum eu purus id ex auctor pulvinar in sed mauris. Morbi auctor viverra sodales. Mauris vitae sapien nec sem convallis porta. Fusce sodales ligula sodales neque vehicula, non dapibus ipsum sodales. Integer luctus lacus non ullamcorper vestibulum.'
+      if (oai >= 0.8) {
+        typology.textContent = 'NORMIE';
+        resultDesc.textContent = 'Twitter can’t stand you. You are the aggregate of what every neighbor in America thinks across every issue. You pretty much align with the popular consensus on every conceivable issue, and in those few areas where you don’t agree with the majority, the public is pretty evenly split: the median voter in the truest sense of the word. If you haven’t considered running for elected office, you should. The wonks will hate you and your idiosyncratic views, but you’re the exact sort of person that Americans say they want their politicians to be. Don’t gamble on winning though: competitive partisan primaries tend to weed out milquetoast moderates like you.';
+        resultQuote.textContent = '“In a democracy, the people get the government they deserve.” ~ Alexis de Tocqueville';
       }
-      else if (oai >= 0.75) {
-        typology.textContent = 'VERY NORMAL';
-        resultDesc.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id lorem vel dui euismod elementum. Curabitur sed nibh non urna pulvinar interdum. Vestibulum eu purus id ex auctor pulvinar in sed mauris. Morbi auctor viverra sodales. Mauris vitae sapien nec sem convallis porta. Fusce sodales ligula sodales neque vehicula, non dapibus ipsum sodales. Integer luctus lacus non ullamcorper vestibulum.'
+      else if (oai >= 0.6) {
+        typology.textContent = 'MR. POPULAR-IST';
+        resultDesc.textContent = 'Admit it: you work in consulting, right? You like your token hot takes, but you like electability more. Or maybe, you’re not even cynical and you just genuinely hold normal opinions that are generally popular with the American public. At any rate, it’s very impressive, and it frankly makes you something of an oddity among your increasingly ideological peers.You probably seriously hate what’s happened to political discourse in your own party or America at-large in recent years. You’re the type of guy who’s in a good position to fix it.';
+        resultQuote.textContent = '“You campaign in poetry. You govern in prose.” ~ Mario Cuomo';     
       }
-      else if (oai >= 0.5) {
-        typology.textContent = 'MOSTLY NORMAL';
-        resultDesc.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id lorem vel dui euismod elementum. Curabitur sed nibh non urna pulvinar interdum. Vestibulum eu purus id ex auctor pulvinar in sed mauris. Morbi auctor viverra sodales. Mauris vitae sapien nec sem convallis porta. Fusce sodales ligula sodales neque vehicula, non dapibus ipsum sodales. Integer luctus lacus non ullamcorper vestibulum.'
+      else if (oai >= 0.4) {
+        typology.textContent = 'THE PARTISAN';
+        resultDesc.textContent = 'Politics isn’t your personality, but it’s a team sport and one you feel obliged to play. Whether or not you have an “ideology” per se, you certainly know who “your people” are and what “your side” believes. You probably enjoy respectable, partisan media of the sort one might find on cable TV or in legacy newspapers, and you’re nagged by a mild, but persistent sense that the country would be so much better off if those other guys were just a bit less insane. You’re persuadable within an Overton window facing in a given direction, and you’re reasonable, at least to all the other guys within a standard deviation of your own views. For all our talk of the “median voter”, you are probably the most common type of American voter.';
+        resultQuote.textContent = '“Treat everyone as your friend, but know who your friends are.” ~ Nancy Pelosi';
       }
-      else if (oai >= 0.25) {
-        typology.textContent = 'SOMEWHAT DEVIANT';
-        resultDesc.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id lorem vel dui euismod elementum. Curabitur sed nibh non urna pulvinar interdum. Vestibulum eu purus id ex auctor pulvinar in sed mauris. Morbi auctor viverra sodales. Mauris vitae sapien nec sem convallis porta. Fusce sodales ligula sodales neque vehicula, non dapibus ipsum sodales. Integer luctus lacus non ullamcorper vestibulum.'
+      else if (oai >= 0.2) {
+        typology.textContent = 'THE IDEOLOGUE';
+        resultDesc.textContent = 'You do not merely support some positions and oppose others. You drink, eat, breath, and shelter in the sublime object of ideology. It is not only a lens through which to view the world, but a framework, a theory of power, and a list of villains that writes your existence into a grand historical narrative in which you and your compatriots are the heroes of history, the hand of God, the final synthesis of the dialectic. Moderation is not a neutral stance, but a rhetorical cudgel. Compromise is not a secular disappointment, but a moral failure. Fine, you may be unpopular, but you’re right. If so, let’s hope the world comes around to your view.';
+        resultQuote.textContent = '“Extremism in the defense of liberty is no vice; and moderation in the pursuit of justice is no virtue.” ~ Barry Goldwater';
       }
       else if (oai >= 0.0) {
-        typology.textContent = 'VERY DEVIANT';
-        resultDesc.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id lorem vel dui euismod elementum. Curabitur sed nibh non urna pulvinar interdum. Vestibulum eu purus id ex auctor pulvinar in sed mauris. Morbi auctor viverra sodales. Mauris vitae sapien nec sem convallis porta. Fusce sodales ligula sodales neque vehicula, non dapibus ipsum sodales. Integer luctus lacus non ullamcorper vestibulum.'
+        typology.textContent = 'FREAK DEVIANT';
+        resultDesc.textContent = 'Saying that you are outside the mainstream would imply that you have some relation to it. This could scarcely be further from the truth. Your views do not cluster in existing coalitions, and attempts to place you somewhere between left and right are more likely to send the tester up and down walls. Most people probably find your political views, and I mean most if not all of them, kinda gross– Not that you care all that much. You may share your takes or you may not, depending on whether you can be bothered to wage the inevitable conflict that would follow. You’re unlikely to be elected, but hey, at least you’re pretty likely to be screenshotted!'; 
+        resultQuote.textContent = '“Sanity is not statistical.” ~ Winston Smith in 1984';    
       }
     }
     else {
       const pctg = document.createElement('percentage');
       percentage.textContent = '--%';
       typology.textContent = 'UNOPINIONATED';
-      resultDesc.textContent = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id lorem vel dui euismod elementum. Curabitur sed nibh non urna pulvinar interdum. Vestibulum eu purus id ex auctor pulvinar in sed mauris. Morbi auctor viverra sodales. Mauris vitae sapien nec sem convallis porta. Fusce sodales ligula sodales neque vehicula, non dapibus ipsum sodales. Integer luctus lacus non ullamcorper vestibulum.'
+      resultDesc.textContent = '???'
       rects.forEach(r => {
         r.style.backgroundColor = '#ffffff';
       });
@@ -66,7 +72,7 @@
     const answeredP = document.createElement('p');
     answeredP.style.marginBottom = '-14px';
     answeredP.textContent = `Answered questions: ${nonSkipped} / ${payload.questions.length}`;
-    resultDesc.appendChild(answeredP);
+    resultDescBox.appendChild(answeredP);
 
     var agreeCount = 0;
     var disagreeCount = 0;
@@ -78,13 +84,13 @@
     const countsP = document.createElement('p');
     countsP.textContent = `Agreed: ${agreeCount} — Disagreed: ${disagreeCount}`;
     countsP.style.marginBottom = '0px';
-    resultDesc.appendChild(countsP);
+    resultDescBox.appendChild(countsP);
 
     const wrapper = document.createElement('div');
     wrapper.style.maxHeight = '60vh';
     wrapper.style.overflow = 'auto';
-    wrapper.style.marginLeft = "-10%";
-    wrapper.style.marginRight = "-10%";
+    wrapper.style.marginLeft = "0%";
+    wrapper.style.marginRight = "0%";
     wrapper.style.border = "2px solid #443e3c";
 
     const tbl = document.createElement('table');
@@ -186,18 +192,17 @@
         supportLabel.style.position = 'absolute';
       }
 
-      if (window.innerWidth > 600) {
+      if (window.innerWidth > 540) {
         barWrapper.appendChild(bar);
         barWrapper.appendChild(supportLabel)
         support.appendChild(barWrapper);
         row.appendChild(support);
       }
 
-      if (window.innerWidth < 601) {
+      if (window.innerWidth < 541) {
         const theirAns = document.createElement('td');
         theirAns.style.verticalAlign = 'middle';
 
-        // fix vtcl cetner
         const inner = document.createElement('div');
         inner.style.display = 'flex';
         inner.style.alignItems = 'center';
