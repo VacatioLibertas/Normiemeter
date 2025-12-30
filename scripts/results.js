@@ -23,7 +23,7 @@
     var oai = null;
     // make it from 0 - 100
     oai = ((payload.totalScore / totalMax)+1)/2;
-    const pct = (oai * 100).toFixed(0);
+    const pct = Math.round(oai * 100);
     const rects = document.querySelectorAll('.rectangle');
     if (totalMax > 0) {
       percentage.textContent = pct + '%';
