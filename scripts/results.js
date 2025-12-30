@@ -23,11 +23,16 @@
     var oai = null;
     // make it from 0 - 100
     oai = ((payload.totalScore / totalMax)+1)/2;
-    const pct = (oai * 100);
+    const pct = (oai * 100).toFixed(0);
     const rects = document.querySelectorAll('.rectangle');
     if (totalMax > 0) {
-      percentage.textContent = `${Math.trunc(pct)}%`;
-
+      percentage.textContent = pct + '%';
+      rects.forEach((r, i) => {
+        const filled =  Math.round(12*pct/100);
+        if (i < filled) {
+          r.style.backgroundColor = '#FCBA04';
+        }
+      });
       if (oai >= 0.8) {
         typology.textContent = 'NORMIE';
         resultDesc.textContent = 'Twitter can’t stand you. You are the aggregate of what every neighbor in America thinks across every issue. You pretty much align with the popular consensus on every conceivable issue, and in those few areas where you don’t agree with the majority, the public is pretty evenly split: the median voter in the truest sense of the word. If you haven’t considered running for elected office, you should. The wonks will hate you and your idiosyncratic views, but you’re the exact sort of person that Americans say they want their politicians to be. Don’t gamble on winning though: competitive partisan primaries tend to weed out milquetoast moderates like you.';

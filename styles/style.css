@@ -351,7 +351,7 @@ Fonts (from Substack):
     height: 65px;
     border-radius: 6px;
     position: absolute;
-    background-color: #FCBA04;
+    background-color: #756c69;
     left: 50%;
     top: 50%;
     transform: 
@@ -362,18 +362,19 @@ Fonts (from Substack):
       rotate(var(--angle, 0deg));
   }
 
-  .rectangle:nth-child(1)  { --i: 0; --angle: 90deg;}
-  .rectangle:nth-child(2)  { --i: 1; --angle: 120deg;}
-  .rectangle:nth-child(3)  { --i: 2; --angle: 150deg;}
-  .rectangle:nth-child(4)  { --i: 3; --angle: 180deg;}
-  .rectangle:nth-child(5)  { --i: 4; --angle: 210deg;}
-  .rectangle:nth-child(6)  { --i: 5; --angle: 240deg;}
-  .rectangle:nth-child(7)  { --i: 6; --angle: 270deg;}
-  .rectangle:nth-child(8)  { --i: 7; --angle: 300deg;}
-  .rectangle:nth-child(9)  { --i: 8; --angle: 330deg;}
-  .rectangle:nth-child(10) { --i: 9; --angle: 360deg;}
-  .rectangle:nth-child(11) { --i: 10; --angle: 390deg;}
-  .rectangle:nth-child(12) { --i: 11; --angle: 410deg;}
+  .rectangle:nth-child(1) { --i: 9; --angle: 360deg;}
+  .rectangle:nth-child(12) { --i: 10; --angle: 390deg;}
+  .rectangle:nth-child(11) { --i: 11; --angle: 410deg;}
+  .rectangle:nth-child(10)  { --i: 0; --angle: 90deg;}
+  .rectangle:nth-child(9)  { --i: 1; --angle: 120deg;}
+  .rectangle:nth-child(8)  { --i: 2; --angle: 150deg;}
+  .rectangle:nth-child(7)  { --i: 3; --angle: 180deg;}
+  .rectangle:nth-child(6)  { --i: 4; --angle: 210deg;}
+  .rectangle:nth-child(5)  { --i: 5; --angle: 240deg;}
+  .rectangle:nth-child(4)  { --i: 6; --angle: 270deg;}
+  .rectangle:nth-child(3)  { --i: 7; --angle: 300deg;}
+  .rectangle:nth-child(2)  { --i: 8; --angle: 330deg;}
+
 
   #throbber::after {
     content: "";
