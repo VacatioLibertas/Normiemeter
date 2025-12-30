@@ -23,11 +23,7 @@
     var oai = null;
     // make it from 0 - 100
     oai = ((payload.totalScore / totalMax)+1)/2;
-    const pct = (oai * 100).toFixed(1);
-    const pctg = document.getElementById('percentage');
-    const type = document.getElementById('typology');
-    const typeDesc = document.getElementById('resultDesc');
-    const typeQuote = document.getElementById('resultQuote');
+    const pct = (oai * 100);
     const rects = document.querySelectorAll('.rectangle');
     if (totalMax > 0) {
       percentage.textContent = `${Math.trunc(pct)}%`;
