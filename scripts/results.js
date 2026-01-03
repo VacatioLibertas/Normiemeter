@@ -13,19 +13,38 @@
     title.textContent = 'Results';
 
     var totalMax = 0;
+    var demMax = 0;
+    var repMax = 0;
     for (const a of (payload.answers)) {
       if (!a || a.answer == 'skip') continue;
       const q = payload.questions[a.index];
-      const netSupport = Number(q['Net Support']) || 0;
-      const salience = Number(q['Salience']) || 0;
-      totalMax += salience * Math.abs(netSupport);
+      const netSupport = Number(q['Net Support']);
+      const demSupport = Number(q['Democratic Position Support']);
+      const repSupport = Number(q['Republican Position Support']);
+      totalMax += Math.abs(netSupport);
+      demMax += Math.abs(demSupport);
+      repMax += Math.abs(repSupport);
     }
-    var oai = null;
+    var agreeCount = 0;
+    var disagreeCount = 0;
+    var demCount = 0;
+    var repCount = 0;
+    const nonSkipped = (payload.answers).filter(a => a && a.answer !== 'skip').length;
+      for (const a of (payload.answers)) {
+      if (!a) continue;
+      if (a.answer == 'agree') agreeCount++;
+      if (a.answer == 'disagree') disagreeCount++;
+      if(a.answer !== 'skip') {
+        if (a.contrib2 > 0 || a.contrib3 == 0) demCount++;
+        if (a.contrib3 > 0 || a.contrib2 == 0) repCount++;
+      }
+    }
     // make it from 0 - 100
-    oai = ((payload.totalScore / totalMax)+1)/2;
+    var oai = ((payload.totalScore / totalMax)+1)/2;
     const pct = Math.round(oai * 100);
     const rects = document.querySelectorAll('.rectangle');
-    if (totalMax > 0) {
+    // arbitry threshold in order to get a real result
+    if (nonSkipped > 5) {
       percentage.textContent = pct + '%';
       rects.forEach((r, i) => {
         const filled =  Math.round(12*pct/100);
@@ -33,59 +52,101 @@
           r.style.backgroundColor = '#FCBA04';
         }
       });
-      if (oai >= 0.8) {
-        typology.textContent = 'NORMIE';
-        resultDesc.textContent = 'Twitter can’t stand you. You are the aggregate of what every neighbor in America thinks across every issue. You pretty much align with the popular consensus on every conceivable issue, and in those few areas where you don’t agree with the majority, the public is pretty evenly split: the median voter in the truest sense of the word. If you haven’t considered running for elected office, you should. The wonks will hate you and your idiosyncratic views, but you’re the exact sort of person that Americans say they want their politicians to be. Don’t gamble on winning though: competitive partisan primaries tend to weed out milquetoast moderates like you.';
-        resultQuote.textContent = '“In a democracy, the people get the government they deserve.” ~ Alexis de Tocqueville';
+      // 20 answered Qs threshold to weed out the laziest yes-men. it has to be deserved.
+      if (disagreeCount == 0 && nonSkipped > 20) {
+        const pctg = document.createElement('percentage');
+        percentage.textContent = 'YES%';
+        const uhhh = document.getElementById('result');
+        uhhh.textContent = 'YES';
+        typology.textContent = 'THE YES-MAN';
+        resultDesc.textContent = 'You’re either a bot, just clicking buttons for fun, or the unhealthiest people-pleaser alive. Do you not hold any opinions of your own, or are you just plain manipulative? Do you need to talk to a professional? Anyway, congratulations on finding this “secret” result!';
+        resultQuote.textContent = '“The great art of pleasing is to appear pleased with others.”';
+        quoteAuthor.textContent = '~ Lady Sarah Pennington';
+        resultExamples.textContent = 'Examples: My dog, Joseph Goebbels';
+        rects.forEach(r => {
+        r.style.backgroundColor = '#87CEEB';
+      });
+      }
+      else if (oai >= 0.7) {
+        typology.textContent = 'THE MEDIAN VOTER';
+        resultDesc.textContent = 'Twitter can’t stand you. You are the aggregate of what every neighbor in America thinks across every issue. You pretty much align with the popular consensus on every conceivable issue, and in those few areas where you don’t agree with the majority, the public is pretty evenly split. The wonks and ideologues hate you and your idiosyncratic views. Let them. You are more likely than practically anyone else to be the one who decides any election you vote in.';
+        resultQuote.textContent = '“In a democracy, the people get the government they deserve.”';
+        quoteAuthor.textContent = '~ Alexis de Tocqueville';
+        resultExamples.textContent ='Examples: Joe Manchin, Tom Hanks, Hank Hill';
       }
       else if (oai >= 0.6) {
         typology.textContent = 'MR. POPULAR-IST';
-        resultDesc.textContent = 'Admit it: you work in consulting, right? You like your token hot takes, but you like electability more. Or maybe, you’re not even cynical and you just genuinely hold normal opinions that are generally popular with the American public. At any rate, it’s very impressive, and it frankly makes you something of an oddity among your increasingly ideological peers.You probably seriously hate what’s happened to political discourse in your own party or America at-large in recent years. You’re the type of guy who’s in a good position to fix it.';
-        resultQuote.textContent = '“You campaign in poetry. You govern in prose.” ~ Mario Cuomo';     
+        resultDesc.textContent = 'Admit it: you work in consulting, right? You like your token hot takes, but you like electability more. Or maybe, you’re not even cynical and you just genuinely hold normal opinions that are generally popular with the American public. At any rate, it frankly makes you something of an oddity among your increasingly ideological peers. You probably hate what’s happened to political discourse in your own party or America at-large in recent years, or you’ve become politically homeless on account of your eccentricities.';
+        resultQuote.textContent = '“You campaign in poetry. You govern in prose.”';
+        quoteAuthor.textContent = '~ Mario Cuomo';
+        resultExamples.textContent = 'Examples: Matthew Yglesias, Tony Blair, Arnold Schwarzenegger';
       }
       else if (oai >= 0.4) {
         typology.textContent = 'THE PARTISAN';
-        resultDesc.textContent = 'Politics isn’t your personality, but it’s a team sport and one you feel obliged to play. Whether or not you have an “ideology” per se, you certainly know who “your people” are and what “your side” believes. You probably enjoy respectable, partisan media of the sort one might find on cable TV or in legacy newspapers, and you’re nagged by a mild, but persistent sense that the country would be so much better off if those other guys were just a bit less insane. You’re persuadable within an Overton window facing in a given direction, and you’re reasonable, at least to all the other guys within a standard deviation of your own views. For all our talk of the “median voter”, you are probably the most common type of American voter.';
-        resultQuote.textContent = '“Treat everyone as your friend, but know who your friends are.” ~ Nancy Pelosi';
+        resultDesc.textContent = 'In American politics, the median voter is a pretty eccentric character. Most Americans hold a heterogeneous mix of popular and unpopular views, and you are no exception. Odds are that your political party is a strong predictor of which unpopular views you hold. There’s really not much to say about you. While someone who holds political views closer to the median may be more normal on an issue-by-issue basis, you are probably the most common type of voter.';
+        resultQuote.textContent = '“Treat everyone as your friend, but know who your friends are.”';
+        quoteAuthor.textContent = '~ Nancy Pelosi';
+        resultExamples.textContent = 'Examples: Oprah Winfrey, Mitt Romney, Amy Klobuchar'
       }
-      else if (oai >= 0.2) {
-        typology.textContent = 'THE IDEOLOGUE';
-        resultDesc.textContent = 'You do not merely support some positions and oppose others. You drink, eat, breath, and shelter in the sublime object of ideology. It is not only a lens through which to view the world, but a framework, a theory of power, and a list of villains that writes your existence into a grand historical narrative in which you and your compatriots are the heroes of history, the hand of God, the final synthesis of the dialectic. Moderation is not a neutral stance, but a rhetorical cudgel. Compromise is not a secular disappointment, but a moral failure. Fine, you may be unpopular, but you’re right. If so, let’s hope the world comes around to your view.';
-        resultQuote.textContent = '“Extremism in the defense of liberty is no vice; and moderation in the pursuit of justice is no virtue.” ~ Barry Goldwater';
+      else if (oai >= 0.3) {
+        typology.textContent = 'THE CONTRARIAN';
+        resultDesc.textContent = 'You’re not confused; you’re just an asshole. That’s not a bad thing. Your political disposition is probably structured less by a coherent ideology than by a general sense of irritation. If an idea becomes fashionable, you see the stains. If an idea is ancient, you see who it serves. Whether this makes you profound or nihilistic is up for interpretation, but it certainly doesn’t win you many friends. For every election your preferred candidates lose, you can console yourself with the times history has vindicated you and your type. Abolitionists, liberals, democrats, and nationalists were all once decisive ideological minorities, and not too long ago. Today, they are hegemonic. The same, however, can also be said for eugenicists, revolutionary socialists, fascists, and isolationists, groups towards which history has been less kind.';
+        resultQuote.textContent = '“Extremism in the defense of liberty is no vice; and moderation in the pursuit of justice is no virtue.”';
+        quoteAuthor.textContent = '~ Barry Goldwater';
+        resultExamples.textContent = 'Examples: Thomas Paine, Christopher Hitchens, Peter Thiel';
       }
       else if (oai >= 0.0) {
-        typology.textContent = 'FREAK DEVIANT';
-        resultDesc.textContent = 'Saying that you are outside the mainstream would imply that you have some relation to it. This could scarcely be further from the truth. Your views do not cluster in existing coalitions, and attempts to place you somewhere between left and right are more likely to send the tester up and down walls. Most people probably find your political views, and I mean most if not all of them, kinda gross– Not that you care all that much. You may share your takes or you may not, depending on whether you can be bothered to wage the inevitable conflict that would follow. You’re unlikely to be elected, but hey, at least you’re pretty likely to be screenshotted!'; 
-        resultQuote.textContent = '“Sanity is not statistical.” ~ Winston Smith in 1984';    
+        typology.textContent = 'THE DEVIANT';
+        resultDesc.textContent = 'Saying that you are outside the mainstream would imply that you have some relation to it. This could scarcely be further from the truth. Your views probably do not cluster in existing coalitions, and attempts to place you somewhere between left and right are more likely to send the tester up and down walls. Most people probably find your political views, and I mean most if not all of them, kinda gross– Not that you care all that much. You may share your takes or you may not, depending on whether you can be bothered to wage the inevitable conflict that would follow. You’re unlikely to be elected, but hey, at least you’re pretty likely to be screenshotted!';        resultQuote.textContent = '“Sanity is not statistical.”';
+        quoteAuthor.textContent = '~ George Orwell, 1984';
+        resultExamples.textContent = 'Examples: Nick Land, Lyndon LaRouche, Travis Bickle';
       }
     }
     else {
       const pctg = document.createElement('percentage');
-      percentage.textContent = '--%';
+      percentage.textContent = 'NULL%';
+      const uhhh = document.getElementById('result');
+      uhhh.textContent = 'LAZY';
       typology.textContent = 'UNOPINIONATED';
-      resultDesc.textContent = '???'
+      resultDesc.textContent = 'You skipped (almost) every question, no fun label and description for you!'
+      resultQuote.textContent = '“If you expect nothing from somebody you are never disappointed.”';
+      quoteAuthor.textContent = '~ Sylvia Plath';
+      resultExamples.textContent = 'Examples: ...';
       rects.forEach(r => {
-        r.style.backgroundColor = '#ffffff';
+        r.style.backgroundColor = '#756c69';
       });
     }
-
-    const nonSkipped = (payload.answers).filter(a => a && a.answer !== 'skip').length || 0;
+    
+    /* for debugging
     const answeredP = document.createElement('p');
-    answeredP.style.marginBottom = '-14px';
+    answeredP.style.marginBottom = '0px';
     answeredP.textContent = `Answered questions: ${nonSkipped} / ${payload.questions.length}`;
     resultDescBox.appendChild(answeredP);
 
-    var agreeCount = 0;
-    var disagreeCount = 0;
-    for (const a of (payload.answers)) {
-      if (!a) continue;
-      if (a.answer == 'agree') agreeCount++;
-      if (a.answer == 'disagree') disagreeCount++;
-    }
     const countsP = document.createElement('p');
     countsP.textContent = `Agreed: ${agreeCount} — Disagreed: ${disagreeCount}`;
+    countsP.style.marginTop = '0px';
     countsP.style.marginBottom = '0px';
     resultDescBox.appendChild(countsP);
+
+    const rawScore = document.createElement('p');
+    rawScore.style.marginTop = '0px';
+    rawScore.style.marginBottom = '0px';
+    rawScore.textContent = `Raw score: ${payload.totalScore + totalMax} / ${2 * totalMax}`;
+    resultDescBox.appendChild(rawScore);
+    
+    const partisanCount = document.createElement('p');
+    partisanCount.style.marginTop = '0px';
+    partisanCount.style.marginBottom = '0px';
+    partisanCount.textContent = `Democratic: ${demCount} — Republican: ${repCount}`;
+    resultDescBox.appendChild(partisanCount);
+    
+    const partisanScore = document.createElement('p');
+    partisanScore.style.marginTop = '0px';
+    partisanScore.style.marginBottom = '0px';
+    partisanScore.textContent = `Raw Dem: ${payload.demScore + demMax} / ${demMax * 2} — Raw Rep: ${payload.repScore + repMax} / ${repMax * 2}`;
+    resultDescBox.appendChild(partisanScore);
+    */
 
     const wrapper = document.createElement('div');
     wrapper.style.maxHeight = '60vh';
@@ -167,7 +228,7 @@
       bar.style.position = 'absolute';
       bar.style.height = '100%';
       bar.style.backgroundColor = supportValue >= 0 ? '#57bb8a' : '#e67c73';
-      const magnitude = Math.min(Math.abs(supportValue), 100); // clamp
+      const magnitude = Math.abs(supportValue);
       bar.style.width = magnitude + '%';
       const w = bar.style.width;
 
