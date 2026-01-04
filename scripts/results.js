@@ -379,7 +379,7 @@
       axisLine.style.zIndex = '1';
       wrapper.appendChild(axisLine);
       requestAnimationFrame(() => {
-        const supportIndex = Array.from(thead.rows[0].cells).findIndex(th => th.textContent == 'POPULARITY');
+        const supportIndex = Array.from(thead.rows[0].cells).findIndex(th => th.textContent == 'POPULARITY ↑↓');
         if (supportIndex < 0 || tbody.rows.length == 0) {
           return;
         }
