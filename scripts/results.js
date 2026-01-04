@@ -188,7 +188,7 @@
     headRow.appendChild(qNum);
 
     const titlePolicy = document.createElement('th');
-    titlePolicy.textContent = 'POLICY';
+    titlePolicy.textContent = 'POLICY ↑↓';
     titlePolicy.style.cursor = 'pointer';
     titlePolicy.addEventListener('click', () => {
       sortTable(0);
@@ -197,10 +197,10 @@
 
     const supportHead = document.createElement('th');
     if (window.innerWidth > 540) {
-    supportHead.textContent = 'POPULARITY';
+    supportHead.textContent = 'POPULARITY ↑↓';
     }
     else {
-      supportHead.textContent = 'NET SUPPORT'
+      supportHead.textContent = 'NET SUPPORT ↑↓'
     }
     supportHead.style.textAlign = 'center';
     supportHead.style.cursor = 'pointer';
@@ -210,7 +210,7 @@
     headRow.appendChild(supportHead);
 
     const urAns = document.createElement('th');
-    urAns.textContent = 'YOUR ANSWER';
+    urAns.textContent = 'YOUR ANSWER ↑↓';
     urAns.style.textAlign = 'right';
     urAns.style.cursor = 'pointer';
     urAns.addEventListener('click', () => {
