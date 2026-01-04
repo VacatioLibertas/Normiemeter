@@ -39,6 +39,39 @@
 		return 0;
 	}
 
+		// tentative partisan version
+	function computeContribution2(q, answer) {
+		const demSupport = Number(q['Democratic Position Support']);
+		const proposer = q['Coding'];
+		if (proposer == 'Democratic') {
+			if (answer == 'agree') return demSupport;
+			if (answer == 'disagree') return -demSupport;
+			return 0;
+		}
+		if (proposer == 'Republican') {
+			if (answer == 'agree') return -demSupport;
+			if (answer == 'disagree') return demSupport;
+			return 0;
+		}
+		return 0;
+	}
+
+	function computeContribution3(q, answer) {
+		const repSupport = Number(q['Republican Position Support']);
+		const proposer = q['Coding'];
+		if (proposer == 'Republican') {
+			if (answer == 'agree') return repSupport;
+			if (answer == 'disagree') return -repSupport;
+			return 0;
+		}
+		if (proposer == 'Democratic') {
+			if (answer == 'agree') return -repSupport;
+			if (answer == 'disagree') return repSupport;
+			return 0;
+		}
+		return 0;
+	}
+
 	// progress element
 	let progress = document.getElementById('progress');
 	if (!progress) {
@@ -107,6 +140,8 @@
 		questions: [],
 		index: 0,
 		totalScore: 0,
+		demScore: 0,
+		repScore: 0,
 		answers: []
 	};
 
@@ -146,10 +181,14 @@
 				"Opponent Argument 1": q['Opponent Argument 1'] || '',
 				"Opponent Argument 2": q['Opponent Argument 2'] || '',
 				"Net Support": Number(q['Net Support']),
-				Salience: Number(q['Salience'])
+				"Democratic Position Support": Number(q['Democratic Position Support']),
+				"Republican Position Support": Number(q['Republican Position Support']),
+				"Salience": Number(q['Salience'])
 			})),
 			answers: state.answers,
-			totalScore: state.totalScore
+			totalScore: state.totalScore,
+			demScore: state.demScore,
+			repScore: state.repScore,
 		};
 		localStorage.setItem('normiemeter_results', JSON.stringify(payload));
 		// go to results page
@@ -181,8 +220,12 @@
 		agree.onclick = () => {
 			const q = state.questions[state.index];
 			const contrib = computeContribution(q, 'agree');
+			const contrib2 = computeContribution2(q, 'agree');
+			const contrib3 = computeContribution3(q, 'agree');
 			state.totalScore += contrib;
-			state.answers.push({index: state.index, answer: 'agree', contrib});
+			state.demScore += contrib2;
+			state.repScore += contrib3;
+			state.answers.push({index: state.index, answer: 'agree', contrib, contrib2, contrib3});
 			nextQuestion();
 		};
 
@@ -199,8 +242,12 @@
 		disagree.onclick = () => {
 			const q = state.questions[state.index];
 			const contrib = computeContribution(q, 'disagree');
+			const contrib2 = computeContribution2(q, 'disagree');
+			const contrib3 = computeContribution3(q, 'disagree');
 			state.totalScore += contrib;
-			state.answers.push({index: state.index, answer: 'disagree', contrib});
+			state.demScore += contrib2;
+			state.repScore += contrib3;
+			state.answers.push({index: state.index, answer: 'disagree', contrib, contrib2, contrib3});
 			nextQuestion();
 		};
 		
@@ -232,6 +279,8 @@
 				if (answerIndex !== -1) {
 					const removedAnswer = state.answers.splice(answerIndex, 1)[0];
 					state.totalScore -= removedAnswer.contrib;
+					state.demScore -= removedAnswer.contrib2;
+					state.repScore -= removedAnswer.contrib3;
 				}
 				renderCurrentQuestion();
 			}
@@ -265,7 +314,9 @@
 		skip.onclick = () => {
 			const q = state.questions[state.index];
 			const contrib = computeContribution(q, 'skip');
-			state.answers.push({index: state.index, answer: 'skip', contrib});
+			const contrib2 = computeContribution2(q, 'skip');
+			const contrib3 = computeContribution3(q, 'skip');
+			state.answers.push({index: state.index, answer: 'skip', contrib, contrib2, contrib3});
 			nextQuestion();
 		};
 
@@ -285,7 +336,7 @@
 		skipToEnd.onclick = () => {
 			for (var j = state.index; j < state.questions.length; j++) {
 				if (!state.answers.some(a => a.index == j)) {
-					state.answers.push({index: j, answer: 'skip', contrib: 0});
+					state.answers.push({index: j, answer: 'skip', contrib: 0, contrib2: 0, contrib3: 0});
 				}
 			}
 			finishQuiz();
@@ -339,6 +390,8 @@
 			state.questions = state.questions.slice(0, 40);
 			state.index = 0;
 			state.totalScore = 0;
+			state.demScore = 0;
+			state.repScore = 0;
 			state.answers = [];
 			renderQuestion(state.questions[0], 0, state.questions.length);
 			renderButtons();

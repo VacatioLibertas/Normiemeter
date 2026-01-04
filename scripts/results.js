@@ -82,10 +82,10 @@
         resultExamples.textContent = 'Examples: Matthew Yglesias, Tony Blair, Arnold Schwarzenegger';
       }
       else if (oai >= 0.4) {
-        typology.textContent = 'THE PARTISAN';
+        typology.textContent = 'THE AVERAGE JOE';
         resultDesc.textContent = 'In American politics, the median voter is a pretty eccentric character. Most Americans hold a heterogeneous mix of popular and unpopular views, and you are no exception. Odds are that your political party is a strong predictor of which unpopular views you hold. There’s really not much to say about you. While someone who holds political views closer to the median may be more normal on an issue-by-issue basis, you are probably the most common type of voter.';
-        resultQuote.textContent = '“Treat everyone as your friend, but know who your friends are.”';
-        quoteAuthor.textContent = '~ Nancy Pelosi';
+        resultQuote.textContent = '“In America, anyone can be President. That’s one of the risks you take.”';
+        quoteAuthor.textContent = '~ Adlai Stevenson II';
         resultExamples.textContent = 'Examples: Oprah Winfrey, Mitt Romney, Amy Klobuchar'
       }
       else if (oai >= 0.3) {
@@ -117,7 +117,6 @@
       });
     }
     
-    /* for debugging
     const answeredP = document.createElement('p');
     answeredP.style.marginBottom = '0px';
     answeredP.textContent = `Answered questions: ${nonSkipped} / ${payload.questions.length}`;
@@ -146,7 +145,21 @@
     partisanScore.style.marginBottom = '0px';
     partisanScore.textContent = `Raw Dem: ${payload.demScore + demMax} / ${demMax * 2} — Raw Rep: ${payload.repScore + repMax} / ${repMax * 2}`;
     resultDescBox.appendChild(partisanScore);
-    */
+
+    percentDem = Math.round(((payload.demScore + demMax)/(demMax * 2))*100);
+    percentRep = Math.round(((payload.repScore + repMax)/(repMax * 2))*100);
+
+    const partisanPct = document.createElement('p');
+    partisanPct.style.marginTop = '0px';
+    partisanPct.style.marginBottom = '0px';
+    partisanPct.textContent = `Pct Dem: ${percentDem}% — Pct Rep: ${percentRep}%`;
+    resultDescBox.appendChild(partisanPct);
+
+    const partisanRatio = document.createElement('p');
+    partisanRatio.style.marginTop = '0px';
+    partisanRatio.style.marginBottom = '0px';
+    partisanRatio.textContent = `Dem/Rep ratio: ${(percentDem/percentRep).toFixed(2)}:1 — Rep/Dem ratio: ${(percentRep/percentDem).toFixed(2)}:1`;
+    resultDescBox.appendChild(partisanRatio);
 
     const wrapper = document.createElement('div');
     wrapper.style.maxHeight = '60vh';
@@ -160,33 +173,57 @@
     tbl.style.width = '100%';
     tbl.style.borderCollapse = 'collapse';
 
-    const thead = document.createElement('thead');
+    const thead = document.createElement('thead');  
     const headRow = document.createElement('tr');
 
     const qNum = document.createElement('th');
     qNum.textContent = 'Q.';
     qNum.style.width = '10px';
+    qNum.style.cursor = 'pointer';
+    qNum.addEventListener('click', () => {
+      sortTable(0);
+    })
     headRow.appendChild(qNum);
 
     const titlePolicy = document.createElement('th');
     titlePolicy.textContent = 'POLICY';
+    titlePolicy.style.cursor = 'pointer';
+    titlePolicy.addEventListener('click', () => {
+      sortTable(0);
+    })
     headRow.appendChild(titlePolicy);
 
     const supportHead = document.createElement('th');
-    if (window.innerWidth > 600) {
+    if (window.innerWidth > 540) {
     supportHead.textContent = 'POPULARITY';
     }
     else {
       supportHead.textContent = 'NET SUPPORT'
     }
     supportHead.style.textAlign = 'center';
+    supportHead.style.cursor = 'pointer';
+    supportHead.addEventListener('click', () => {
+      sortTable(4);
+    })
     headRow.appendChild(supportHead);
 
     const urAns = document.createElement('th');
     urAns.textContent = 'YOUR ANSWER';
     urAns.style.textAlign = 'right';
+    urAns.style.cursor = 'pointer';
+    urAns.addEventListener('click', () => {
+      sortTable(5);
+    })
     headRow.appendChild(urAns);
 
+    const hiddenSptHead = document.createElement('th');
+    hiddenSptHead.style.display = 'none';
+    headRow.appendChild(hiddenSptHead);
+
+    const hiddenAnsHead = document.createElement('th');
+    hiddenAnsHead.style.display = 'none';
+    headRow.appendChild(hiddenAnsHead);
+    
     thead.appendChild(headRow);
     tbl.appendChild(thead);
 
@@ -214,7 +251,6 @@
 
       const supportValue = Math.trunc(Number(q['Net Support']));
       const support = document.createElement('td');
-
 
       const barWrapper = document.createElement('div');
       barWrapper.style.position = 'relative';
@@ -312,7 +348,18 @@
       urans.style.fontSize = '32px';
       urans.style.width = '190px';
       row.appendChild(urans);
-      
+
+      const hiddenSptValue = supportValue + 101;
+      const hiddenSpt = document.createElement('td');
+      hiddenSpt.textContent = hiddenSptValue;
+      hiddenSpt.style.display = 'none';
+      row.appendChild(hiddenSpt);
+
+      const hiddenAns = document.createElement('td');
+      hiddenAns.textContent = answerText;
+      hiddenAns.style.display = 'none';
+      row.appendChild(hiddenAns);
+
       tbody.appendChild(row);
     }
 
@@ -321,7 +368,7 @@
     container.appendChild(wrapper);
     wrapper.style.position = 'relative';
 
-    if (window.innerWidth > 600) {
+    if (window.innerWidth > 540) {
       // vertical line btwn bars kinda gets messed up on weird screen sizes 
       const axisLine = document.createElement('div');
       axisLine.style.position = 'absolute';
@@ -340,6 +387,64 @@
       axisLine.style.top = firstCell.offsetTop + 'px';
       axisLine.style.height = (lastCell.offsetTop + lastCell.offsetHeight - firstCell.offsetTop) + 'px';
       });
+    }
+    
+    //from W3 Schools with some edits
+    function sortTable(n) {
+      var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+      table = tbl;
+      switching = true;
+      // Set the sorting direction to ascending:
+      dir = "asc";
+      /* Make a loop that will continue until
+      no switching has been done: */
+      while (switching) {
+        // Start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /* Loop through all table rows (except the
+        first, which contains table headers): */
+        for (i = 1; i < (rows.length - 1); i++) {
+          // Start by saying there should be no switching:
+          shouldSwitch = false;
+          /* Get the two elements you want to compare,
+          one from current row and one from the next: */
+          x = rows[i].getElementsByTagName("TD")[n];
+          y = rows[i + 1].getElementsByTagName("TD")[n];
+          x2 = x.innerHTML.toLowerCase();
+          y2 = y.innerHTML.toLowerCase();
+          /* Check if the two rows should switch place,
+          based on the direction, asc or desc: */
+          if (dir == "asc") {
+            if (x2.localeCompare(y2, undefined, {numeric: true, sensitivity: 'base'}) == 1) {
+              shouldSwitch = true;
+              // If so, mark as a switch and break the loop:
+              break;
+            }
+          } else if (dir == "desc") {
+            if (y2.localeCompare(x2, undefined, {numeric: true, sensitivity: 'base'}) == 1) {
+              // If so, mark as a switch and break the loop:
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+        if (shouldSwitch) {
+          /* If a switch has been marked, make the switch
+          and mark that a switch has been done: */
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+          // Each time a switch is done, increase this count by 1:
+          switchcount ++;
+        } else {
+          /* If no switching has been done AND the direction is "asc",
+          set the direction to "desc" and run the while loop again. */
+          if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+          }
+        }
+      }
     }
 
     /* const restart = document.createElement('button');

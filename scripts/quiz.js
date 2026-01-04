@@ -176,15 +176,15 @@
 	};
 
 	function renderCurrentQuestion() {
-    	renderQuestion(state.questions[state.index], state.index, state.questions.length);
+    renderQuestion(state.questions[state.index], state.index, state.questions.length);
 	}
 
 	function nextQuestion() {
 		if (state.index >= state.questions.length - 1) {
 			finishQuiz();
-		} else {
+		}
+		else {
 			state.index++;
-			
 			renderCurrentQuestion();
 		}
 	}
