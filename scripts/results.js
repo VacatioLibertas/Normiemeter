@@ -117,6 +117,7 @@
       });
     }
     
+    /*
     const answeredP = document.createElement('p');
     answeredP.style.marginBottom = '0px';
     answeredP.textContent = `Answered questions: ${nonSkipped} / ${payload.questions.length}`;
@@ -160,6 +161,7 @@
     partisanRatio.style.marginBottom = '0px';
     partisanRatio.textContent = `Dem/Rep ratio: ${(percentDem/percentRep).toFixed(2)}:1 — Rep/Dem ratio: ${(percentRep/percentDem).toFixed(2)}:1`;
     resultDescBox.appendChild(partisanRatio);
+    */
 
     const wrapper = document.createElement('div');
     wrapper.style.maxHeight = '60vh';
